@@ -646,6 +646,46 @@
             box-shadow: 0 0 20px rgba(88, 166, 255, 0.7);
             color: #fff; /* White text on hover */
         }
+
+        /* Return to Top Button */
+        #returnToTopBtn {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 30px; /* 30px from the bottom */
+            right: 30px; /* 30px from the right */
+            z-index: 999; /* High z-index to be on top */
+            background: linear-gradient(45deg, #58A6FF, #3FB950); /* GitHub Blue to Green gradient */
+            color: white; /* White text */
+            border: none; /* No border */
+            border-radius: 10px; /* Square button with slight rounding */
+            padding: 10px 15px; /* Padding for text and icon */
+            font-size: 16px; /* Text size */
+            cursor: pointer; /* Pointer on hover */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; /* Use flexbox for centering icon and text */
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Space between icon and text */
+            font-weight: 600; /* Make text a bit bolder */
+            text-decoration: none; /* Remove underline for anchor if it were one */
+        }
+
+        #returnToTopBtn:hover {
+            background: linear-gradient(45deg, #3FB950, #58A6FF); /* Reverse gradient on hover */
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+        }
+
+        /* Responsive adjustment for the button */
+        @media (max-width: 768px) {
+            #returnToTopBtn {
+                bottom: 20px;
+                right: 20px;
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -959,6 +999,11 @@
         </div>
     </div>
 
+    <!-- Return to Top Button -->
+    <button id="returnToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i> Return to Top
+    </button>
+
     <script>
         // Scroll progress indicator
         window.addEventListener('scroll', () => {
@@ -1188,6 +1233,26 @@
                 console.error("Error initializing canvas animation:", error);
             }
         };
+
+        // Return to Top Button Logic
+        const returnToTopBtn = document.getElementById("returnToTopBtn");
+
+        // Show/hide the button based on scroll position
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                returnToTopBtn.style.display = "flex"; // Use flex to center icon and text
+            } else {
+                returnToTopBtn.style.display = "none";
+            }
+        };
+
+        // When the user clicks on the button, scroll to the top of the document
+        returnToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth" // Smooth scroll
+            });
+        });
 
     </script>
 </body>
