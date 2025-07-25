@@ -6,61 +6,52 @@
     <title>Rajesh Tiwari - Sr. DevOps & Cloud Infrastructure Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Basic Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body and Font Styles */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #e0e0e0; /* Lighter text for darker background */
+            color: #eee; /* Dark theme text color */
+            background: #1a1a2e; /* Dark theme background */
             min-height: 100vh;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            position: relative; /* Needed for canvas absolute positioning */
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Canvas Background */
-        #gradientCanvas {
+        canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Place behind content */
-            opacity: 0.9; /* Slightly transparent */
+            z-index: -1;
+            opacity: 0.3; /* Subtle background animation */
         }
 
-        /* Content Wrapper for Z-index */
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1; /* Ensure content is above canvas */
         }
 
-        /* Header Styling */
         header {
-            background: rgba(30, 40, 50, 0.95); /* Darker, tech-inspired background */
+            background: rgba(30, 30, 50, 0.95); /* Darker header background */
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Darker shadow */
             margin-bottom: 30px;
             animation: slideDown 0.8s ease-out;
-            color: #e0e0e0; /* Lighter text */
+            color: #fff;
         }
 
-        /* Header Animation */
         @keyframes slideDown {
             from {
                 opacity: 0;
@@ -72,37 +63,33 @@
             }
         }
 
-        /* Profile Image Styling */
         .profile-img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green for CI/CD */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 60px;
             color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Darker shadow */
         }
 
-        /* Heading Styles */
         h1 {
-            color: #007bff; /* Primary blue for headings */
+            color: #e0e0e0; /* Lighter heading color */
             font-size: 2.5em;
             margin-bottom: 10px;
             font-weight: 700;
         }
 
         .subtitle {
-            color: #ced4da; /* Light gray for subtitle */
+            color: #b0b0b0; /* Lighter subtitle color */
             font-size: 1.2em;
             margin-bottom: 20px;
-            min-height: 1.2em; /* Ensure space for typewriter effect */
         }
 
-        /* Contact Information */
         .contact-info {
             display: flex;
             justify-content: center;
@@ -115,28 +102,26 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #adb5bd; /* Muted gray for contact items */
+            color: #b0b0b0; /* Lighter contact item color */
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .contact-item:hover {
-            color: #007bff; /* Primary blue on hover */
+            color: #667eea;
         }
 
-        /* Section Styling */
         .section {
-            background: rgba(30, 40, 50, 0.95); /* Darker, tech-inspired background */
+            background: rgba(30, 30, 50, 0.95); /* Darker section background */
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Darker shadow */
             animation: fadeInUp 0.8s ease-out;
-            color: #e0e0e0; /* Lighter text */
+            color: #eee;
         }
 
-        /* Section Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -149,7 +134,7 @@
         }
 
         .section h2 {
-            color: #007bff; /* Primary blue for section headings */
+            color: #e0e0e0; /* Lighter heading color */
             font-size: 2em;
             margin-bottom: 25px;
             text-align: center;
@@ -164,21 +149,19 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green for CI/CD */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             border-radius: 2px;
         }
 
-        /* About Section */
         .about-text {
             font-size: 1.1em;
             text-align: center;
-            color: #ced4da; /* Light gray for text */
+            color: #b0b0b0; /* Lighter text color */
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.8;
         }
 
-        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -187,14 +170,14 @@
         }
 
         .skill-category {
-            background: linear-gradient(135deg, #2a3a4a 0%, #34495e 100%); /* Darker gradient for skill categories */
+            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker skill category background */
             padding: 20px;
             border-radius: 15px;
-            border-left: 5px solid #28a745; /* Green accent for CI/CD success */
+            border-left: 5px solid #667eea;
         }
 
         .skill-category h3 {
-            color: #007bff; /* Primary blue for skill category headings */
+            color: #e0e0e0; /* Lighter heading color */
             margin-bottom: 15px;
             font-size: 1.2em;
         }
@@ -206,27 +189,20 @@
         }
 
         .skill-tag {
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green for tags */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.9em;
             font-weight: 500;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .skill-tag:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Experience Section */
         .experience-item {
-            background: linear-gradient(135deg, #2a3a4a 0%, #34495e 100%); /* Darker gradient */
+            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker experience item background */
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 25px;
-            border-left: 5px solid #28a745; /* Green accent */
+            border-left: 5px solid #667eea;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -245,13 +221,13 @@
         }
 
         .job-title {
-            color: #007bff; /* Primary blue */
+            color: #e0e0e0; /* Lighter text color */
             font-size: 1.3em;
             font-weight: 600;
         }
 
         .job-period {
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
@@ -260,7 +236,7 @@
         }
 
         .company {
-            color: #adb5bd; /* Muted gray */
+            color: #b0b0b0; /* Lighter text color */
             font-size: 1.1em;
             margin-bottom: 15px;
         }
@@ -273,18 +249,17 @@
             margin-bottom: 8px;
             padding-left: 20px;
             position: relative;
-            color: #ced4da; /* Light gray */
+            color: #b0b0b0; /* Lighter text color */
         }
 
         .job-highlights li::before {
             content: '▶';
             position: absolute;
             left: 0;
-            color: #28a745; /* Green accent */
+            color: #667eea;
             font-size: 0.8em;
         }
 
-        /* Certifications Section */
         .certifications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -292,12 +267,12 @@
         }
 
         .cert-item {
-            background: linear-gradient(135deg, #007bff 0%, #28a745 100%); /* Blue to Green */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 25px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 123, 255, 0.3); /* Shadow with primary blue */
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
             transition: transform 0.3s ease;
         }
 
@@ -315,26 +290,24 @@
             font-size: 0.9em;
         }
 
-        /* Education Section */
         .education-item {
-            background: linear-gradient(135deg, #2a3a4a 0%, #34495e 100%); /* Darker gradient */
+            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker education item background */
             padding: 20px;
             border-radius: 15px;
             margin-bottom: 15px;
-            border-left: 5px solid #28a745; /* Green accent */
+            border-left: 5px solid #667eea;
         }
 
         .education-item h3 {
-            color: #007bff; /* Primary blue */
+            color: #e0e0e0; /* Lighter text color */
             margin-bottom: 5px;
         }
 
         .education-item p {
-            color: #adb5bd; /* Muted gray */
+            color: #b0b0b0; /* Lighter text color */
             margin-bottom: 5px;
         }
 
-        /* Interests Section */
         .interests-list {
             display: flex;
             flex-wrap: wrap;
@@ -343,7 +316,7 @@
         }
 
         .interest-item {
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
             padding: 10px 20px;
             border-radius: 25px;
@@ -353,11 +326,10 @@
             gap: 8px;
         }
 
-        /* Call to Action Section */
         .cta-section {
             text-align: center;
             padding: 40px;
-            background: linear-gradient(135deg, #007bff 0%, #28a745 100%); /* Blue to Green */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 20px;
             margin-top: 30px;
@@ -367,7 +339,7 @@
         .cta-button {
             display: inline-block;
             background: white;
-            color: #007bff; /* Primary blue */
+            color: #667eea;
             padding: 15px 30px;
             border-radius: 30px;
             text-decoration: none;
@@ -381,7 +353,6 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -409,25 +380,23 @@
             }
         }
 
-        /* Scroll Indicator */
         .scroll-indicator {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: rgba(255, 255, 255, 0.1); /* Lighter background for scroll bar */
+            background: rgba(255, 255, 255, 0.1); /* Darker scroll indicator */
             z-index: 1000;
         }
 
         .scroll-progress {
             height: 100%;
-            background: linear-gradient(45deg, #007bff, #28a745); /* Blue to Green */
+            background: linear-gradient(45deg, #667eea, #764ba2);
             width: 0%;
             transition: width 0.1s ease;
         }
 
-        /* Floating Navigation */
         .floating-nav {
             position: fixed;
             right: 30px;
@@ -443,13 +412,13 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4); /* Muted white */
+            background: rgba(255, 255, 255, 0.3); /* Darker nav dot */
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .nav-dot.active {
-            background: #28a745; /* Green when active */
+            background: white;
             transform: scale(1.2);
         }
 
@@ -458,502 +427,369 @@
                 display: none;
             }
         }
+
+        /* Table of Contents */
+        .table-of-contents {
+            background: rgba(30, 30, 50, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .table-of-contents h2 {
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .table-of-contents li {
+            margin-bottom: 8px;
+        }
+
+        .table-of-contents a {
+            display: block;
+            background: linear-gradient(45deg, #4a4a60, #5a5a70); /* Darker link background */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-weight: 500;
+        }
+
+        .table-of-contents a:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
-    <!-- Canvas for animated background -->
-    <canvas id="gradientCanvas"></canvas>
+    <canvas id="backgroundCanvas"></canvas>
 
-    <!-- Content Wrapper to ensure content is above canvas -->
-    <div class="content-wrapper">
-        <!-- Scroll progress indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-progress" id="scrollProgress"></div>
-        </div>
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
 
-        <!-- Floating navigation dots -->
-        <div class="floating-nav" id="floatingNav">
-            <div class="nav-dot active" data-section="header"></div>
-            <div class="nav-dot" data-section="about"></div>
-            <div class="nav-dot" data-section="skills"></div>
-            <div class="nav-dot" data-section="experience"></div>
-            <div class="nav-dot" data-section="certifications"></div>
-            <div class="nav-dot" data-section="education"></div>
-            <div class="nav-dot" data-section="interests"></div>
-        </div>
+    <div class="floating-nav" id="floatingNav">
+        <div class="nav-dot active" data-section="header"></div>
+        <div class="nav-dot" data-section="table-of-contents"></div> <div class="nav-dot" data-section="about"></div>
+        <div class="nav-dot" data-section="skills"></div>
+        <div class="nav-dot" data-section="experience"></div>
+        <div class="nav-dot" data-section="certifications"></div>
+        <div class="nav-dot" data-section="education"></div>
+        <div class="nav-dot" data-section="interests"></div>
+    </div>
 
-        <div class="container">
-            <!-- Header Section -->
-            <header id="header">
-                <div class="profile-img">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h1>Rajesh Tiwari</h1>
-                <div class="subtitle" id="typewriter-subtitle"></div>
-                <div class="contact-info">
-                    <a href="mailto:rajtiwari10091995@gmail.com" class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        rajtiwari10091995@gmail.com
-                    </a>
-                    <a href="tel:+918517011341" class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        (+91) 8517011341
-                    </a>
-                    <a href="https://www.linkedin.com/in/rajesh-tiwari-43984b81" target="_blank" class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        LinkedIn Profile
-                    </a>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Indore, India
-                    </div>
-                </div>
-            </header>
-
-            <!-- About Me Section -->
-            <section class="section" id="about">
-                <h2>About Me</h2>
-                <div class="about-text">
-                    Seasoned and results-driven Sr. DevOps & Cloud Infrastructure Engineer with 10+ years of hands-on experience in architecting, automating, and optimizing mission-critical deployments across AWS, Google Cloud Platform (GCP), and Oracle Cloud Infrastructure (OCI). Proven expertise in building scalable, secure, and cost-efficient cloud-native Infrastructure.
-                    <br><br>
-                    Strong background in SRE principles, platform engineering, and DevSecOps, with a focus on reliability, observability and continuous improvement. Adept at leading cross-functional teams, driving cloud modernization, and enabling high-performance delivery through automation, governance, and infrastructure best practices.
-                </div>
-            </section>
-
-            <!-- Technical Skills Section -->
-            <section class="section" id="skills">
-                <h2>Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3><i class="fas fa-cloud"></i> Cloud Platforms</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">AWS</span>
-                            <span class="skill-tag">Google Cloud Platform</span>
-                            <span class="skill-tag">Oracle Cloud Infrastructure</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Terraform</span>
-                            <span class="skill-tag">Ansible</span>
-                            <span class="skill-tag">AWS CloudFormation</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-cogs"></i> CI/CD & Automation</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Jenkins</span>
-                            <span class="skill-tag">GitHub Actions</span>
-                            <span class="skill-tag">Cloud Build</span>
-                            <span class="skill-tag">ArgoCD</span>
-                            <span class="skill-tag">GitOps</span>
-                            <span class="skill-tag">Harness</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-container-storage"></i> Containerization</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Docker</span>
-                            <span class="skill-tag">Kubernetes</span>
-                            <span class="skill-tag">EKS</span>
-                            <span class="skill-tag">GKE</span>
-                            <span class="skill-tag">Helm</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-chart-line"></i> Monitoring & Observability</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Datadog</span>
-                            <span class="skill-tag">Instana</span>
-                            <span class="skill-tag">Prometheus</span>
-                            <span class="skill-tag">Grafana</span>
-                            <span class="skill-tag">CloudWatch</span>
-                            <span class="skill-tag">ELK Stack</span>
-                            <span class="skill-tag">Splunk</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-robot"></i> MLOps</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Kubeflow</span>
-                            <span class="skill-tag">MLflow</span>
-                            <span class="skill-tag">Data Versioning</span>
-                            <span class="skill-tag">Model Deployment</span>
-                            <span class="skill-tag">Model Monitoring</span>
-                            <span class="skill-tag">Data Pipelines</span>
-                        </div>
-                    </div>
-                    <div class="skill-category">
-                        <h3><i class="fas fa-tools"></i> Development Tools</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">GitHub</span>
-                            <span class="skill-tag">GitLab</span>
-                            <span class="skill-tag">BitBucket</span>
-                            <span class="skill-tag">Confluence</span>
-                            <span class="skill-tag">JIRA</span>
-                            <span class="skill-tag">Packer</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Professional Experience Section -->
-            <section class="section" id="experience">
-                <h2>Professional Experience</h2>
-                
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">Sr. DevOps Engineer</div>
-                            <div class="company">FiftyFive Technologies, Indore, India</div>
-                        </div>
-                        <div class="job-period">May 2025 - Current</div>
-                    </div>
-                    <ul class="job-highlights">
-                        <li>Optimized AWS cloud resource usage by analyzing cost metrics and recommending right-sized configurations to improve cost-efficiency</li>
-                        <li>Maintained robust monitoring systems for applications and infrastructure using tools like CloudWatch, Prometheus, and Grafana</li>
-                        <li>Increased system reliability and minimized downtime by proactively conducting root cause analysis (RCA) and troubleshooting incidents</li>
-                        <li>Reduced deployment times by implementing CI/CD pipelines across multiple projects using Jenkins, GitHub Actions, and Ansible</li>
-                        <li>Streamlined infrastructure management through automation using Terraform, Kubernetes, and Ansible, supporting consistent and scalable deployments</li>
-                        <li>Contributed to architecture design decisions, ensuring scalable, modular, and future-ready infrastructure for application growth</li>
-                        <li>Mentored junior engineers, sharing best practices and elevating team performance through coaching and hands-on support</li>
-                        <li>Standardized development environments using Docker, enabling consistent and platform-agnostic deployments across teams</li>
-                        <li>Championed a DevOps culture, fostering seamless collaboration between development, QA, and operations teams to accelerate delivery and improve quality</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">DevOps Engineer / SRE</div>
-                            <div class="company">Volansys Technologies, Ahmedabad (Remote)</div>
-                        </div>
-                        <div class="job-period">Jun 2022 - Apr 2025</div>
-                    </div>
-                    <ul class="job-highlights">
-                        <li>Architected cloud-native, highly available systems using EC2, EKS, Lambda, CloudFront, VPC, IAM, ALB/NLB, S3, and RDS, aligned with the AWS Well-Architected Framework</li>
-                        <li>Developed Infrastructure as Code (IaC) with Terraform and AWS CloudFormation, ensuring consistent, version-controlled provisioning across environments</li>
-                        <li>Built and optimized CI/CD pipelines using Jenkins, GitHub Actions, and Ansible, improving deployment speed and enforcing quality gates for microservices</li>
-                        <li>Implemented centralized monitoring and logging using CloudWatch, Prometheus, Grafana, and Splunk, enhancing observability and reducing MTTR</li>
-                        <li>Embedded DevSecOps practices by integrating tools like Snyk and Trivy, and enforcing secure access with IAM policies, Secrets Manager, and encryption techniques</li>
-                        <li>Led cloud cost optimization efforts through resource usage analysis, auto-scaling strategies, and Reserved Instance planning</li>
-                        <li>Created detailed architecture diagrams, runbooks, and technical documentation using Confluence and Eraser.io</li>
-                        <li>Advocated for automation-first, self-service platforms, and platform engineering principles to scale DevOps capabilities across teams</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">IT & Cloud Support Specialist</div>
-                            <div class="company">TaskUs, Indore (Remote)</div>
-                        </div>
-                        <div class="job-period">Sep 2020 - Jun 2022</div>
-                    </div>
-                    <ul class="job-highlights">
-                        <li>Automated cloud infrastructure provisioning using Terraform, ensuring consistency, version control, and repeatable deployments</li>
-                        <li>Conducted Root Cause Analysis (RCA) for service downtime, implemented proactive monitoring and auto-healing strategies</li>
-                        <li>Enhanced cloud security posture through automated vulnerability assessments using Amazon Inspector</li>
-                        <li>Built and maintained immutable infrastructure, including server builds, application deployments, OS upgrades, and automated patch management</li>
-                        <li>Set up and managed CI/CD pipelines using Jenkins, automating build, test, and deployment stages across microservice applications</li>
-                        <li>Applied strong knowledge of DevSecOps, integrating security scanning into CI/CD workflows</li>
-                        <li>Collaborated with development, QA, and SRE teams to promote Agile DevOps culture and improve developer productivity</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">Senior Analyst</div>
-                            <div class="company">Continuum Global Services, Indore</div>
-                        </div>
-                        <div class="job-period">Jul 2018 - Aug 2020</div>
-                    </div>
-                    <ul class="job-highlights">
-                        <li>Analyzed system performance and contributed to optimization efforts on AI-powered Linux platforms</li>
-                        <li>Assisted in CI/CD pipeline implementation using Jenkins, and supported infrastructure automation through Terraform scripts</li>
-                        <li>Supported version control activities using Git and GitLab, including branching, tagging, and release coordination</li>
-                        <li>Contributed to Docker-based deployment workflows, ensuring image build consistency and alignment with release standards</li>
-                        <li>Provided support for Kubernetes environments, focusing on automated deployments, scalability, and availability analysis</li>
-                        <li>Collaborated with cross-functional teams to maintain documentation and track DevOps process improvements</li>
-                    </ul>
-                </div>
-
-                <div class="experience-item">
-                    <div class="job-header">
-                        <div>
-                            <div class="job-title">Back Office Executive</div>
-                            <div class="company">Teleperformance, Indore</div>
-                        </div>
-                        <div class="job-period">Aug 2015 - Jul 2018</div>
-                    </div>
-                    <ul class="job-highlights">
-                        <li>Managed quality assurance programme, including on-site evaluation, internal audits and customer surveys</li>
-                        <li>Developed incident, change and problem management skills</li>
-                        <li>Conducted root cause analysis and created technical documentation</li>
-                        <li>Documented best practices and maintained technical documentation</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Certifications Section -->
-            <section class="section" id="certifications">
-                <h2>Certifications</h2>
-                <div class="certifications-grid">
-                    <div class="cert-item">
-                        <i class="fas fa-certificate" style="font-size: 2em; margin-bottom: 15px;"></i>
-                        <h3>HashiCorp Certified: Terraform Associate (003)</h3>
-                        <div class="cert-date">June 2025</div>
-                    </div>
-                    <div class="cert-item">
-                        <i class="fab fa-aws" style="font-size: 2em; margin-bottom: 15px;"></i>
-                        <h3>AWS Certified Solutions Architect – Professional</h3>
-                        <div class="cert-date">September 2023</div>
-                    </div>
-                    <div class="cert-item">
-                        <i class="fas fa-dharmachakra" style="font-size: 2em; margin-bottom: 15px;"></i>
-                        <h3>CKA: Certified Kubernetes Administrator</h3>
-                        <div class="cert-date">August 2023</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Education Section -->
-            <section class="section" id="education">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <h3>Bachelor of Computer Applications</h3>
-                    <p>Shri Vaishnav Institute of Management - Indore, M.P.</p>
-                </div>
-                <div class="education-item">
-                    <h3>Higher Secondary</h3>
-                    <p>Ideal Academy - Indore, M.P.</p>
-                </div>
-                <div class="education-item">
-                    <h3>High School</h3>
-                    <p>Ideal Academy - Indore, M.P.</p>
-                </div>
-            </section>
-
-            <!-- Interests Section -->
-            <section class="section" id="interests">
-                <h2>Interests</h2>
-                <div class="interests-list">
-                    <div class="interest-item">
-                        <i class="fas fa-table-tennis"></i>
-                        Table Tennis
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-chess"></i>
-                        Chess
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-baseball-ball"></i>
-                        Cricket
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-volleyball-ball"></i>
-                        Volleyball
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-rocket"></i>
-                        Space Exploration
-                    </div>
-                    <div class="interest-item">
-                        <i class="fas fa-atom"></i>
-                        Physics Theories
-                    </div>
-                </div>
-            </section>
-
-            <!-- Call to Action Section -->
-            <div class="cta-section">
-                <h2>Let's Work Together</h2>
-                <p>Ready to take your cloud infrastructure to the next level? Let's discuss how I can help optimize your DevOps processes and build scalable, reliable systems.</p>
-                <a href="mailto:rajtiwari10091995@gmail.com" class="cta-button">
-                    <i class="fas fa-envelope"></i> Get In Touch
-                </a>
+    <div class="container">
+        <header id="header">
+            <div class="profile-img">
+                <i class="fas fa-user"></i>
             </div>
+            <h1>Rajesh Tiwari</h1>
+            <div class="subtitle">Sr. DevOps & Cloud Infrastructure Engineer</div>
+            <div class="contact-info">
+                <a href="mailto:rajtiwari10091995@gmail.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    rajtiwari10091995@gmail.com
+                </a>
+                <a href="tel:+918517011341" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    (+91) 8517011341
+                </a>
+                <a href="https://www.linkedin.com/in/rajesh-tiwari-43984b81" target="_blank" class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    LinkedIn Profile
+                </a>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Indore, India
+                </div>
+            </div>
+        </header>
+
+        <section class="section table-of-contents" id="table-of-contents">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Technical Skills</a></li>
+                <li><a href="#experience">Professional Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#interests">Interests</a></li>
+            </ul>
+        </section>
+
+        <section class="section" id="about">
+            <h2>About Me</h2>
+            <div class="about-text">
+                Seasoned and results-driven Sr. DevOps & Cloud Infrastructure Engineer with 10+ years of hands-on experience in architecting, automating, and optimizing mission-critical deployments across AWS, Google Cloud Platform (GCP), and Oracle Cloud Infrastructure (OCI). Proven expertise in building scalable, secure, and cost-efficient cloud-native Infrastructure.
+                <br><br>
+                Strong background in SRE principles, platform engineering, and DevSecOps, with a focus on reliability, observability and continuous improvement. Adept at leading cross-functional teams, driving cloud modernization, and enabling high-performance delivery through automation, governance, and infrastructure best practices.
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i> Cloud Platforms</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Google Cloud Platform</span>
+                        <span class="skill-tag">Oracle Cloud Infrastructure</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> MLOps</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Kubeflow</span>
+                        <span class="skill-tag">MLflow</span>
+                        <span class="skill-tag">TensorFlow Extended (TFX)</span>
+                        <span class="skill-tag">Data Version Control (DVC)</span>
+                        <span class="skill-tag">Vertex AI</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Ansible</span>
+                        <span class="skill-tag">AWS CloudFormation</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> CI/CD & Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Cloud Build</span>
+                        <span class="skill-tag">ArgoCD</span>
+                        <span class="skill-tag">GitOps</span>
+                        <span class="skill-tag">Harness</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-container-storage"></i> Containerization</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">EKS</span>
+                        <span class="skill-tag">GKE</span>
+                        <span class="skill-tag">Helm</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> Monitoring & Observability</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Datadog</span>
+                        <span class="skill-tag">Instana</span>
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">CloudWatch</span>
+                        <span class="skill-tag">ELK Stack</span>
+                        <span class="skill-tag">Splunk</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Development Tools</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">GitLab</span>
+                        <span class="skill-tag">BitBucket</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">Packer</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Sr. DevOps Engineer</div>
+                        <div class="company">FiftyFive Technologies, Indore, India</div>
+                    </div>
+                    <div class="job-period">May 2025 - Current</div>
+                </div>
+                <ul class="job-highlights">
+                    <li>Optimized AWS cloud resource usage by analyzing cost metrics and recommending right-sized configurations to improve cost-efficiency</li>
+                    <li>Maintained robust monitoring systems for applications and infrastructure using tools like CloudWatch, Prometheus, and Grafana</li>
+                    <li>Increased system reliability and minimized downtime by proactively conducting root cause analysis (RCA) and troubleshooting incidents</li>
+                    <li>Reduced deployment times by implementing CI/CD pipelines across multiple projects using Jenkins, GitHub Actions, and Ansible</li>
+                    <li>Streamlined infrastructure management through automation using Terraform, Kubernetes, and Ansible, supporting consistent and scalable deployments</li>
+                    <li>Contributed to architecture design decisions, ensuring scalable, modular, and future-ready infrastructure for application growth</li>
+                    <li>Mentored junior engineers, sharing best practices and elevating team performance through coaching and hands-on support</li>
+                    <li>Standardized development environments using Docker, enabling consistent and platform-agnostic deployments across teams</li>
+                    <li>Championed a DevOps culture, fostering seamless collaboration between development, QA, and operations teams to accelerate delivery and improve quality</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">DevOps Engineer / SRE</div>
+                        <div class="company">Volansys Technologies, Ahmedabad (Remote)</div>
+                    </div>
+                    <div class="job-period">Jun 2022 - Apr 2025</div>
+                </div>
+                <ul class="job-highlights">
+                    <li>Architected cloud-native, highly available systems using EC2, EKS, Lambda, CloudFront, VPC, IAM, ALB/NLB, S3, and RDS, aligned with the AWS Well-Architected Framework</li>
+                    <li>Developed Infrastructure as Code (IaC) with Terraform and AWS CloudFormation, ensuring consistent, version-controlled provisioning across environments</li>
+                    <li>Built and optimized CI/CD pipelines using Jenkins, GitHub Actions, and Ansible, improving deployment speed and enforcing quality gates for microservices</li>
+                    <li>Implemented centralized monitoring and logging using CloudWatch, Prometheus, Grafana, and Splunk, enhancing observability and reducing MTTR</li>
+                    <li>Embedded DevSecOps practices by integrating tools like Snyk and Trivy, and enforcing secure access with IAM policies, Secrets Manager, and encryption techniques</li>
+                    <li>Led cloud cost optimization efforts through resource usage analysis, auto-scaling strategies, and Reserved Instance planning</li>
+                    <li>Created detailed architecture diagrams, runbooks, and technical documentation using Confluence and Eraser.io</li>
+                    <li>Advocated for automation-first, self-service platforms, and platform engineering principles to scale DevOps capabilities across teams</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">IT & Cloud Support Specialist</div>
+                        <div class="company">TaskUs, Indore (Remote)</div>
+                    </div>
+                    <div class="job-period">Sep 2020 - Jun 2022</div>
+                </div>
+                <ul class="job-highlights">
+                    <li>Automated cloud infrastructure provisioning using Terraform, ensuring consistency, version control, and repeatable deployments</li>
+                    <li>Conducted Root Cause Analysis (RCA) for service downtime, implemented proactive monitoring and auto-healing strategies</li>
+                    <li>Enhanced cloud security posture through automated vulnerability assessments using Amazon Inspector</li>
+                    <li>Built and maintained immutable infrastructure, including server builds, application deployments, OS upgrades, and automated patch management</li>
+                    <li>Set up and managed CI/CD pipelines using Jenkins, automating build, test, and deployment stages across microservice applications</li>
+                    <li>Applied strong knowledge of DevSecOps, integrating security scanning into CI/CD workflows</li>
+                    <li>Collaborated with development, QA, and SRE teams to promote Agile DevOps culture and improve developer productivity</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Senior Analyst</div>
+                        <div class="company">Continuum Global Services, Indore</div>
+                    </div>
+                    <div class="job-period">Jul 2018 - Aug 2020</div>
+                </div>
+                <ul class="job-highlights">
+                    <li>Analyzed system performance and contributed to optimization efforts on AI-powered Linux platforms</li>
+                    <li>Assisted in CI/CD pipeline implementation using Jenkins, and supported infrastructure automation through Terraform scripts</li>
+                    <li>Supported version control activities using Git and GitLab, including branching, tagging, and release coordination</li>
+                    <li>Contributed to Docker-based deployment workflows, ensuring image build consistency and alignment with release standards</li>
+                    <li>Provided support for Kubernetes environments, focusing on automated deployments, scalability, and availability analysis</li>
+                    <li>Collaborated with cross-functional teams to maintain documentation and track DevOps process improvements</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Back Office Executive</div>
+                        <div class="company">Teleperformance, Indore</div>
+                    </div>
+                    <div class="job-period">Aug 2015 - Jul 2018</div>
+                </div>
+                <ul class="job-highlights">
+                    <li>Managed quality assurance programme, including on-site evaluation, internal audits and customer surveys</li>
+                    <li>Developed incident, change and problem management skills</li>
+                    <li>Conducted root cause analysis and created technical documentation</li>
+                    <li>Documented best practices and maintained technical documentation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="certifications">
+            <h2>Certifications</h2>
+            <div class="certifications-grid">
+                <div class="cert-item">
+                    <i class="fas fa-certificate" style="font-size: 2em; margin-bottom: 15px;"></i>
+                    <h3>HashiCorp Certified: Terraform Associate (003)</h3>
+                    <div class="cert-date">June 2025</div>
+                </div>
+                <div class="cert-item">
+                    <i class="fab fa-aws" style="font-size: 2em; margin-bottom: 15px;"></i>
+                    <h3>AWS Certified Solutions Architect – Professional</h3>
+                    <div class="cert-date">September 2023</div>
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-dharmachakra" style="font-size: 2em; margin-bottom: 15px;"></i>
+                    <h3>CKA: Certified Kubernetes Administrator</h3>
+                    <div class="cert-date">August 2023</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Bachelor of Computer Applications</h3>
+                <p>Shri Vaishnav Institute of Management - Indore, M.P.</p>
+            </div>
+            <div class="education-item">
+                <h3>Higher Secondary</h3>
+                <p>Ideal Academy - Indore, M.P.</p>
+            </div>
+            <div class="education-item">
+                <h3>High School</h3>
+                <p>Ideal Academy - Indore, M.P.</p>
+            </div>
+        </section>
+
+        <section class="section" id="interests">
+            <h2>Interests</h2>
+            <div class="interests-list">
+                <div class="interest-item">
+                    <i class="fas fa-table-tennis"></i>
+                    Table Tennis
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-chess"></i>
+                    Chess
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-baseball-ball"></i>
+                    Cricket
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-volleyball-ball"></i>
+                    Volleyball
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-rocket"></i>
+                    Space Exploration
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-atom"></i>
+                    Physics Theories
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <h2>Let's Work Together</h2>
+            <p>Ready to take your cloud infrastructure to the next level? Let's discuss how I can help optimize your DevOps processes and build scalable, reliable systems.</p>
+            <a href="mailto:rajtiwari10091995@gmail.com" class="cta-button">
+                <i class="fas fa-envelope"></i> Get In Touch
+            </a>
         </div>
     </div>
 
     <script>
-        // Get the canvas element and its 2D rendering context
-        const canvas = document.getElementById('gradientCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Define colors for the gradient animation (CI/CD theme)
-        const colors = [
-            [0, 123, 255],    // Primary Blue
-            [40, 167, 69],    // Success Green
-            [52, 58, 64],     // Dark Gray
-            [23, 162, 184],   // Info Cyan
-            [108, 117, 125]   // Muted Gray
-        ];
-
-        let colorIndex = 0;
-        let nextColorIndex = 1;
-        let colorProgress = 0;
-        const colorSpeed = 0.005; // Speed of color transition
-
-        let animationFrameId; // To store the requestAnimationFrame ID
-
-        // FlowLine class for the flowing effect (simulating pipeline stages)
-        class FlowLine {
-            constructor(x, y, length, thickness, color, speedX, speedY) {
-                this.x = x;
-                this.y = y;
-                this.length = length;
-                this.thickness = thickness;
-                this.color = color;
-                this.speedX = speedX;
-                this.speedY = speedY;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.roundRect(this.x, this.y, this.length, this.thickness, this.thickness / 2); /* Rounded rectangle */
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Reset line if it goes off-screen
-                if (this.x < -this.length || this.x > canvas.width + this.length ||
-                    this.y < -this.thickness || this.y > canvas.height + this.thickness) {
-                    // Randomly reset from left or top edge
-                    if (Math.random() > 0.5) { // Reset from left
-                        this.x = -this.length;
-                        this.y = Math.random() * canvas.height;
-                    } else { // Reset from top
-                        this.x = Math.random() * canvas.width;
-                        this.y = -this.thickness;
-                    }
-                    this.speedX = (Math.random() * 0.8) + 0.2; // Speed up horizontal flow
-                    this.speedY = (Math.random() - 0.5) * 0.2; // Keep vertical movement subtle
-                    this.length = Math.random() * 30 + 10; // Vary length
-                    this.thickness = Math.random() * 2 + 1; // Vary thickness
-                    this.color = `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.1})`; // Vary transparency
-                }
-            }
-        }
-
-        const flowLines = [];
-        const numberOfFlowLines = 70; // Adjust for more or fewer lines
-
-        // Initialize flow lines
-        function initFlowLines() {
-            for (let i = 0; i < numberOfFlowLines; i++) {
-                flowLines.push(new FlowLine(
-                    Math.random() * canvas.width,
-                    Math.random() * canvas.height,
-                    Math.random() * 30 + 10, // Length between 10 and 40
-                    Math.random() * 2 + 1,   // Thickness between 1 and 3
-                    `rgba(255, 255, 255, ${Math.random() * 0.2 + 0.1})`, // Semi-transparent white
-                    (Math.random() * 0.8) + 0.2, // Speed X (mostly rightward)
-                    (Math.random() - 0.5) * 0.2  // Speed Y (subtle up/down)
-                ));
-            }
-        }
-
-        // Function to resize the canvas to fill the window
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            drawGradient(); // Redraw gradient after resize
-            // No need to re-initialize flow lines fully, they will reset when off-screen
-        }
-
-        // Function to interpolate between two colors
-        function interpolateColor(color1, color2, factor) {
-            const result = color1.slice(); // Create a copy to avoid modifying original
-            for (let i = 0; i < 3; i++) {
-                result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
-            }
-            return `rgb(${result[0]}, ${result[1]}, ${result[2]})`;
-        }
-
-        // Function to draw the animated gradient
-        function drawGradient() {
-            // Get current and next colors
-            const currentColor = colors[colorIndex];
-            const targetColor = colors[nextColorIndex];
-
-            // Interpolate colors based on progress
-            const interpolatedColor1 = interpolateColor(currentColor, targetColor, colorProgress);
-            const interpolatedColor2 = interpolateColor(targetColor, currentColor, colorProgress); // Reverse for the second part of the gradient
-
-            // Create a linear gradient
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, interpolatedColor1);
-            gradient.addColorStop(1, interpolatedColor2);
-
-            // Fill the canvas with the gradient
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        // Animation loop
-        function animateCanvas() {
-            // Update gradient colors
-            colorProgress += colorSpeed;
-            if (colorProgress >= 1) {
-                colorProgress = 0;
-                colorIndex = nextColorIndex;
-                nextColorIndex = (nextColorIndex + 1) % colors.length;
-            }
-            drawGradient();
-
-            // Update and draw flow lines
-            for (let i = 0; i < flowLines.length; i++) {
-                flowLines[i].update();
-                flowLines[i].draw();
-            }
-
-            animationFrameId = requestAnimationFrame(animateCanvas);
-        }
-
-        // Typewriter effect for subtitle
-        const subtitleText = "Architecting, Automating, Optimizing CI/CD Pipelines & Cloud Infrastructure";
-        const subtitleElement = document.getElementById('typewriter-subtitle');
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 70; // milliseconds per character
-        let delayBetweenPhrases = 1500; // milliseconds
-
-        function typeWriter() {
-            const currentText = subtitleText.substring(0, charIndex);
-            subtitleElement.textContent = currentText;
-
-            if (!isDeleting && charIndex < subtitleText.length) {
-                charIndex++;
-                setTimeout(typeWriter, typingSpeed);
-            } else if (isDeleting && charIndex > 0) {
-                charIndex--;
-                setTimeout(typeWriter, typingSpeed / 2); // Faster deleting
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                setTimeout(typeWriter, delayBetweenPhrases);
-            } else if (!isDeleting && charIndex === subtitleText.length) {
-                isDeleting = true;
-                setTimeout(typeWriter, delayBetweenPhrases);
-            }
-        }
-
-        // Event listeners
-        window.addEventListener('resize', resizeCanvas); // Resize canvas on window resize
-        window.addEventListener('load', () => {
-            resizeCanvas(); // Initial resize and draw
-            initFlowLines(); // Initialize flow lines
-            animateCanvas(); // Start the canvas animation loop
-            typeWriter(); // Start the typewriter effect
-        });
-
         // Scroll progress indicator
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop;
@@ -971,7 +807,7 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) { // Adjust offset as needed
+                if (scrollY >= (sectionTop - 200)) {
                     current = section.getAttribute('id');
                 }
             });
@@ -995,7 +831,7 @@
             });
         });
 
-        // Animation on scroll for sections
+        // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1006,15 +842,11 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
-                } else {
-                    // Optional: Reset animation when out of view
-                    // entry.target.style.opacity = '0';
-                    // entry.target.style.transform = 'translateY(50px)';
                 }
             });
         }, observerOptions);
 
-        // Observe all sections for animation
+        // Observe all sections
         sections.forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(50px)';
@@ -1022,16 +854,120 @@
             observer.observe(section);
         });
 
-        // Add interactive elements (skill tags)
+        // Add some interactive elements
         document.querySelectorAll('.skill-tag').forEach(tag => {
             tag.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.1)';
-                this.style.transition = 'transform 0.3s ease';
+                this.style.transition = 'transform 0.2s ease';
             });
             tag.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
             });
         });
+
+
+        // Canvas Animation
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+        let animationFrameId;
+        let particles = [];
+        const particleCount = 70;
+        let mouseX = 0;
+        let mouseY = 0;
+        let hoverEffectActive = false;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.color = 'rgba(102, 126, 234, ' + (Math.random() * 0.5 + 0.2) + ')'; // Blue-purple tones
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Hover effect: particles move away from mouse
+                if (hoverEffectActive) {
+                    const dx = this.x - mouseX;
+                    const dy = this.y - mouseY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const repulsionRadius = 100;
+                    const repulsionStrength = 0.5;
+
+                    if (distance < repulsionRadius) {
+                        const angle = Math.atan2(dy, dx);
+                        this.x += Math.cos(angle) * repulsionStrength;
+                        this.y += Math.sin(angle) * repulsionStrength;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i; j < particles.length; j++) {
+                    const distance = Math.sqrt(
+                        (particles[i].x - particles[j].x) ** 2 +
+                        (particles[i].y - particles[j].y) ** 2
+                    );
+                    if (distance < 100) { // Connect particles if close
+                        ctx.strokeStyle = 'rgba(102, 126, 234, ' + (1 - (distance / 100)) * 0.3 + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            animationFrameId = requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        canvas.addEventListener('mouseenter', () => {
+            hoverEffectActive = true;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            hoverEffectActive = false;
+        });
+
+        resizeCanvas();
+        animateParticles();
+
     </script>
 </body>
 </html>
