@@ -47,7 +47,7 @@
 
         /* Header Section */
         header {
-            background: rgba(22, 27, 34, 0.95); /* Slightly lighter GitHub dark background */
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(30, 35, 45, 0.95)); /* Gradient background */
             backdrop-filter: blur(15px); /* Stronger blur */
             border-radius: 20px;
             padding: 40px;
@@ -57,6 +57,8 @@
             animation: slideDown 0.8s ease-out forwards;
             color: #C9D1D9; /* Light gray text for contrast */
             border: 1px solid rgba(88, 166, 255, 0.2); /* Subtle GitHub blue border */
+            background-size: 200% 200%; /* For animation */
+            animation: slideDown 0.8s ease-out forwards, gradientShift 10s ease infinite alternate; /* Added gradient animation */
         }
 
         @keyframes slideDown {
@@ -68,6 +70,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         .profile-img {
@@ -128,9 +135,8 @@
             text-shadow: 0 0 8px rgba(88, 166, 255, 0.7);
         }
 
-        /* Section Styling */
+        /* Section Styling - General */
         .section {
-            background: rgba(22, 27, 34, 0.9); /* GitHub dark section background */
             backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 40px;
@@ -138,6 +144,45 @@
             box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
             animation: fadeInUp 0.8s ease-out forwards;
             color: #C9D1D9; /* Light gray text for contrast */
+            border: 1px solid rgba(88, 166, 255, 0.1);
+            background-size: 200% 200%; /* For animation */
+            animation: fadeInUp 0.8s ease-out forwards, gradientShift 10s ease infinite alternate; /* Added gradient animation */
+        }
+
+        /* Specific Section Backgrounds (Gradients) */
+        #table-of-contents {
+            background: linear-gradient(135deg, rgba(20, 30, 25, 0.9), rgba(25, 35, 30, 0.9)); /* Deep forest green tone */
+            box-shadow: 0 10px 30px rgba(63, 185, 80, 0.1), 0 0 40px rgba(63, 185, 80, 0.05);
+            border: 1px solid rgba(63, 185, 80, 0.1);
+        }
+        #about {
+            background: linear-gradient(135deg, rgba(35, 25, 40, 0.9), rgba(40, 30, 45, 0.9)); /* Muted deep purple tone */
+            box-shadow: 0 10px 30px rgba(163, 113, 247, 0.1), 0 0 40px rgba(163, 113, 247, 0.05);
+            border: 1px solid rgba(163, 113, 247, 0.1);
+        }
+        #skills {
+            background: linear-gradient(135deg, rgba(25, 40, 40, 0.9), rgba(30, 45, 45, 0.9)); /* Dark teal tone */
+            box-shadow: 0 10px 30px rgba(0, 150, 150, 0.1), 0 0 40px rgba(0, 150, 150, 0.05);
+            border: 1px solid rgba(0, 150, 150, 0.1);
+        }
+        #experience {
+            background: linear-gradient(135deg, rgba(40, 25, 25, 0.9), rgba(45, 30, 30, 0.9)); /* Deep red-brown tone */
+            box-shadow: 0 10px 30px rgba(248, 81, 73, 0.1), 0 0 40px rgba(248, 81, 73, 0.05);
+            border: 1px solid rgba(248, 81, 73, 0.1);
+        }
+        #certifications {
+            background: linear-gradient(135deg, rgba(25, 35, 40, 0.9), rgba(30, 40, 45, 0.9)); /* Dark blue-green tone */
+            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
+            border: 1px solid rgba(88, 166, 255, 0.1);
+        }
+        #education {
+            background: linear-gradient(135deg, rgba(40, 30, 20, 0.9), rgba(45, 35, 25, 0.9)); /* Dark orange-brown tone */
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.1), 0 0 40px rgba(255, 165, 0, 0.05);
+            border: 1px solid rgba(255, 165, 0, 0.1);
+        }
+        #interests {
+            background: linear-gradient(135deg, rgba(20, 25, 35, 0.9), rgba(25, 30, 40, 0.9)); /* Dark blue-gray tone */
+            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
             border: 1px solid rgba(88, 166, 255, 0.1);
         }
 
@@ -153,13 +198,23 @@
         }
 
         .section h2 {
-            color: #F85149; /* GitHub Red heading */
             font-size: 2.5em;
             margin-bottom: 30px;
             text-align: center;
             position: relative;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(248, 81, 73, 0.5);
+            font-weight: 900; /* Made bolder */
+            /* Applied gradient to text */
+            background: linear-gradient(90deg, #58A6FF, #3FB950, #F85149, #A371F7); /* Vibrant gradient */
+            background-size: 400% auto; /* Larger background size for animation */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(88, 166, 255, 0.7); /* Adjusted shadow for gradient text */
+            animation: textGradientShift 8s linear infinite; /* New animation for text gradient */
+        }
+
+        @keyframes textGradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .section h2::after {
@@ -198,12 +253,14 @@
         }
 
         .skill-category {
-            background: rgba(13, 17, 23, 0.8); /* Slightly darker GitHub background */
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
             padding: 25px;
             border-radius: 15px;
             border: 1px solid rgba(88, 166, 255, 0.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: 200% 200%; /* For animation */
+            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
         }
 
         .skill-category:hover {
@@ -244,13 +301,15 @@
 
         /* Experience Section */
         .experience-item {
-            background: rgba(13, 17, 23, 0.8); /* Slightly darker GitHub background */
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 25px;
             border: 1px solid rgba(88, 166, 255, 0.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: 200% 200%; /* For animation */
+            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
         }
 
         .experience-item:hover {
@@ -355,13 +414,15 @@
 
         /* Education Section */
         .education-item {
-            background: rgba(13, 17, 23, 0.8); /* Slightly darker GitHub background */
+            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
             padding: 25px;
             border-radius: 15px;
             margin-bottom: 20px;
             border: 1px solid rgba(88, 166, 255, 0.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: 200% 200%; /* For animation */
+            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
         }
 
         .education-item:hover {
@@ -416,6 +477,8 @@
             margin-top: 30px;
             box-shadow: 0 20px 40px rgba(248, 81, 73, 0.3);
             border: 1px solid rgba(248, 81, 73, 0.5);
+            background-size: 200% 200%; /* For animation */
+            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
         }
 
         .cta-section h2 {
@@ -816,12 +879,6 @@
                         <div class="company">Teleperformance, Indore</div>
                     </div>
                     <div class="job-period">Aug 2015 - Jul 2018</div>
-                </div>
-                <ul class="job-highlights">
-                    <li>Managed quality assurance programme, including on-site evaluation, internal audits and customer surveys</li>
-                    <li>Developed incident, change and problem management skills</li>
-                    <li>Conducted root cause analysis and created technical documentation</li>
-                    <li>Documented best practices and maintained technical documentation</li>
                 </ul>
             </div>
         </section>
@@ -988,7 +1045,7 @@
         const ctx = canvas.getContext('2d');
         let animationFrameId;
         let workflowSteps = [];
-        const stepCount = 8; // Number of CI/CD steps
+        const stepCount = 15; // Increased number of CI/CD steps for more density
         const stepNames = ["CODE", "BUILD", "TEST", "DEPLOY", "MONITOR", "RELEASE", "FEEDBACK", "ITERATE"];
         const stepColors = {
             "CODE": "#3FB950",    // GitHub Green
@@ -1015,7 +1072,7 @@
 
         class WorkflowStep {
             constructor(index) {
-                this.radius = 30; // Size of the step circle
+                this.radius = 40; // Increased size of the step circle
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.speedX = (Math.random() * 0.5 - 0.25) * 2; // Faster movement
@@ -1024,7 +1081,7 @@
                 this.color = stepColors[this.name];
                 this.alpha = 0; // Start invisible
                 this.fadeIn = true; // Control fade in/out
-                this.font = '12px "Inter", sans-serif';
+                this.font = '14px "Inter", sans-serif'; // Adjusted font size for larger bubbles
             }
 
             update() {
