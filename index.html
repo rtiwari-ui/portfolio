@@ -6,6 +6,7 @@
     <title>Rajesh Tiwari - Sr. DevOps & Cloud Infrastructure Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* General Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -13,15 +14,17 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
             line-height: 1.6;
-            color: #eee; /* Dark theme text color */
-            background: #1a1a2e; /* Dark theme background */
+            color: #E0E0E0; /* Light gray for text */
+            background: linear-gradient(135deg, #1A1A2E 0%, #2A1A2E 100%); /* Slightly lighter AI-inspired dark gradient */
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
         }
 
+        /* Canvas Background */
         canvas {
             position: fixed;
             top: 0;
@@ -29,9 +32,11 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.3; /* Subtle background animation */
+            opacity: 0.4; /* More visible background animation */
+            transition: opacity 0.5s ease;
         }
 
+        /* Main Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -40,16 +45,18 @@
             z-index: 1; /* Ensure content is above canvas */
         }
 
+        /* Header Section */
         header {
-            background: rgba(30, 30, 50, 0.95); /* Darker header background */
-            backdrop-filter: blur(10px);
+            background: rgba(30, 20, 30, 0.95); /* Slightly lighter header background */
+            backdrop-filter: blur(15px); /* Stronger blur */
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Darker shadow */
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.1), 0 0 40px rgba(128, 0, 128, 0.05); /* Purple glow shadow */
             margin-bottom: 30px;
-            animation: slideDown 0.8s ease-out;
+            animation: slideDown 0.8s ease-out forwards;
             color: #fff;
+            border: 1px solid rgba(128, 0, 128, 0.2); /* Subtle purple border */
         }
 
         @keyframes slideDown {
@@ -67,27 +74,35 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #8A2BE2, #FF00FF); /* AI-inspired vibrant gradient (Blue Violet to Magenta) */
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 60px;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Darker shadow */
+            color: #fff; /* White icon for contrast */
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.5), 0 0 50px rgba(255, 0, 255, 0.2); /* Stronger glow */
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); box-shadow: 0 0 25px rgba(138, 43, 226, 0.5); }
+            to { transform: scale(1.03); box-shadow: 0 0 35px rgba(138, 43, 226, 0.7); }
         }
 
         h1 {
-            color: #e0e0e0; /* Lighter heading color */
-            font-size: 2.5em;
+            color: #FF00FF; /* Magenta heading */
+            font-size: 2.8em;
             margin-bottom: 10px;
-            font-weight: 700;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
 
         .subtitle {
-            color: #b0b0b0; /* Lighter subtitle color */
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            color: #8A2BE2; /* Blue Violet subtitle */
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            font-weight: 500;
         }
 
         .contact-info {
@@ -102,24 +117,28 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #b0b0b0; /* Lighter contact item color */
+            color: #B0B0B0; /* Light gray */
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease;
         }
 
         .contact-item:hover {
-            color: #667eea;
+            color: #FF00FF; /* Magenta on hover */
+            transform: translateY(-3px);
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.7);
         }
 
+        /* Section Styling */
         .section {
-            background: rgba(30, 30, 50, 0.95); /* Darker section background */
-            backdrop-filter: blur(10px);
+            background: rgba(30, 20, 30, 0.9); /* Slightly lighter section background */
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3); /* Darker shadow */
-            animation: fadeInUp 0.8s ease-out;
-            color: #eee;
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.1), 0 0 40px rgba(128, 0, 128, 0.05);
+            animation: fadeInUp 0.8s ease-out forwards;
+            color: #E0E0E0;
+            border: 1px solid rgba(128, 0, 128, 0.1);
         }
 
         @keyframes fadeInUp {
@@ -134,81 +153,109 @@
         }
 
         .section h2 {
-            color: #e0e0e0; /* Lighter heading color */
-            font-size: 2em;
-            margin-bottom: 25px;
+            color: #FF00FF; /* Magenta heading */
+            font-size: 2.5em;
+            margin-bottom: 30px;
             text-align: center;
             position: relative;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
         }
 
         .section h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #8A2BE2, transparent); /* Glowing line (Blue Violet) */
             border-radius: 2px;
+            animation: underlinePulse 1.5s infinite alternate;
+        }
+
+        @keyframes underlinePulse {
+            from { width: 60px; opacity: 0.7; }
+            to { width: 90px; opacity: 1; }
         }
 
         .about-text {
             font-size: 1.1em;
             text-align: center;
-            color: #b0b0b0; /* Lighter text color */
+            color: #B0B0B0;
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.8;
         }
 
+        /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px; /* Increased gap */
             margin-top: 20px;
         }
 
         .skill-category {
-            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker skill category background */
-            padding: 20px;
+            background: linear-gradient(135deg, #302030 0%, #403040 100%); /* Slightly lighter skill category background */
+            padding: 25px;
             border-radius: 15px;
-            border-left: 5px solid #667eea;
+            border: 1px solid rgba(128, 0, 128, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(128, 0, 128, 0.2), 0 0 30px rgba(128, 0, 128, 0.1);
         }
 
         .skill-category h3 {
-            color: #e0e0e0; /* Lighter heading color */
-            margin-bottom: 15px;
-            font-size: 1.2em;
+            color: #8A2BE2; /* Blue Violet heading */
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 10px; /* Increased gap */
         }
 
         .skill-tag {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 500;
+            background: linear-gradient(45deg, #8A2BE2, #FF00FF); /* Vibrant AI gradient */
+            color: #fff; /* White text for contrast */
+            padding: 8px 15px;
+            border-radius: 25px; /* More rounded */
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
         }
 
+        .skill-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.7); /* Glowing effect */
+        }
+
+        /* Experience Section */
         .experience-item {
-            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker experience item background */
+            background: linear-gradient(135deg, #302030 0%, #403040 100%); /* Slightly lighter experience item background */
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 25px;
-            border-left: 5px solid #667eea;
+            border: 1px solid rgba(128, 0, 128, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .experience-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-7px); /* More pronounced lift */
+            box-shadow: 0 10px 25px rgba(128, 0, 128, 0.2), 0 0 40px rgba(128, 0, 128, 0.1);
         }
 
         .job-header {
@@ -221,22 +268,22 @@
         }
 
         .job-title {
-            color: #e0e0e0; /* Lighter text color */
-            font-size: 1.3em;
-            font-weight: 600;
+            color: #FF00FF; /* Magenta */
+            font-size: 1.4em;
+            font-weight: 700;
         }
 
         .job-period {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(45deg, #8A2BE2, #FF00FF);
+            color: #fff;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9em;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .company {
-            color: #b0b0b0; /* Lighter text color */
+            color: #B0B0B0;
             font-size: 1.1em;
             margin-bottom: 15px;
         }
@@ -247,112 +294,161 @@
 
         .job-highlights li {
             margin-bottom: 8px;
-            padding-left: 20px;
+            padding-left: 25px; /* Increased padding */
             position: relative;
-            color: #b0b0b0; /* Lighter text color */
+            color: #B0B0B0;
         }
 
         .job-highlights li::before {
-            content: '▶';
+            content: '›'; /* Tech-like arrow */
             position: absolute;
             left: 0;
-            color: #667eea;
-            font-size: 0.8em;
+            color: #8A2BE2; /* Blue Violet arrow */
+            font-size: 1.2em;
+            font-weight: bold;
         }
 
+        /* Certifications Section */
         .certifications-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
 
         .cert-item {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #8A2BE2 0%, #FF00FF 100%); /* Vibrant AI gradient */
+            color: #fff;
             padding: 25px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+            display: flex; /* Use flexbox for image and text alignment */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .cert-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.5);
+        }
+
+        .cert-item img {
+            max-width: 100px; /* Adjust image size */
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px; /* Slightly rounded corners for images */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow for images */
         }
 
         .cert-item h3 {
-            font-size: 1.2em;
+            font-size: 1.3em;
             margin-bottom: 10px;
         }
 
         .cert-date {
-            opacity: 0.8;
-            font-size: 0.9em;
+            opacity: 0.9;
+            font-size: 0.95em;
         }
 
+        /* Education Section */
         .education-item {
-            background: linear-gradient(135deg, #2a2a40 0%, #3a3a50 100%); /* Darker education item background */
-            padding: 20px;
+            background: linear-gradient(135deg, #302030 0%, #403040 100%); /* Slightly lighter education item background */
+            padding: 25px;
             border-radius: 15px;
-            margin-bottom: 15px;
-            border-left: 5px solid #667eea;
+            margin-bottom: 20px;
+            border: 1px solid rgba(128, 0, 128, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(128, 0, 128, 0.2);
         }
 
         .education-item h3 {
-            color: #e0e0e0; /* Lighter text color */
-            margin-bottom: 5px;
+            color: #FF00FF;
+            margin-bottom: 8px;
+            font-size: 1.2em;
         }
 
         .education-item p {
-            color: #b0b0b0; /* Lighter text color */
+            color: #B0B0B0;
             margin-bottom: 5px;
+            font-size: 0.95em;
         }
 
+        /* Interests Section */
         .interests-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px; /* Increased gap */
             justify-content: center;
         }
 
         .interest-item {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 500;
+            background: linear-gradient(45deg, #8A2BE2, #FF00FF);
+            color: #fff;
+            padding: 12px 25px; /* Larger padding */
+            border-radius: 30px;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .interest-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        /* Call to Action */
         .cta-section {
             text-align: center;
             padding: 40px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #8A2BE2 0%, #FF00FF 100%); /* Bright AI gradient */
+            color: #fff;
             border-radius: 20px;
             margin-top: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(128, 0, 128, 0.3);
+            border: 1px solid rgba(128, 0, 128, 0.5);
+        }
+
+        .cta-section h2 {
+            color: #fff; /* White heading for contrast */
+            text-shadow: none;
+        }
+
+        .cta-section p {
+            color: #E0E0E0; /* Lighter text */
+            font-size: 1.1em;
         }
 
         .cta-button {
             display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 15px 30px;
-            border-radius: 30px;
+            background: #3A2A3A; /* Slightly lighter dark button */
+            color: #FF00FF; /* Magenta text */
+            padding: 18px 35px; /* Larger button */
+            border-radius: 35px;
             text-decoration: none;
-            font-weight: 600;
-            margin-top: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 700;
+            margin-top: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+            border: 2px solid #FF00FF;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.5), 0 0 50px rgba(255, 0, 255, 0.3);
+            background: #FF00FF; /* Invert colors on hover */
+            color: #fff;
         }
 
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -363,7 +459,11 @@
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
             }
 
             .contact-info {
@@ -378,25 +478,31 @@
             .skills-grid, .certifications-grid {
                 grid-template-columns: 1fr;
             }
+
+            .section h2 {
+                font-size: 2em;
+            }
         }
 
+        /* Scroll Progress Indicator */
         .scroll-indicator {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.1); /* Darker scroll indicator */
+            height: 5px; /* Thicker */
+            background: rgba(128, 0, 128, 0.1); /* Subtle purple background */
             z-index: 1000;
         }
 
         .scroll-progress {
             height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, #8A2BE2, #FF00FF); /* Vibrant AI gradient */
             width: 0%;
-            transition: width 0.1s ease;
+            transition: width 0.1s ease-out;
         }
 
+        /* Floating Navigation Dots */
         .floating-nav {
             position: fixed;
             right: 30px;
@@ -404,22 +510,24 @@
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px; /* Increased gap */
             z-index: 1000;
         }
 
         .nav-dot {
-            width: 12px;
-            height: 12px;
+            width: 14px; /* Larger dots */
+            height: 14px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3); /* Darker nav dot */
+            background: rgba(128, 0, 128, 0.3); /* Purple dot */
+            border: 1px solid rgba(128, 0, 128, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .nav-dot.active {
-            background: white;
-            transform: scale(1.2);
+            background: #FF00FF; /* Solid Magenta when active */
+            transform: scale(1.3); /* More pronounced scale */
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.7); /* Glowing effect */
         }
 
         @media (max-width: 768px) {
@@ -430,16 +538,17 @@
 
         /* Table of Contents */
         .table-of-contents {
-            background: rgba(30, 30, 50, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(30, 20, 30, 0.9);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.1), 0 0 40px rgba(128, 0, 128, 0.05);
+            border: 1px solid rgba(128, 0, 128, 0.1);
         }
 
         .table-of-contents h2 {
-            color: #e0e0e0;
+            color: #FF00FF;
             margin-bottom: 20px;
         }
 
@@ -448,28 +557,31 @@
             padding: 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px; /* Increased gap */
             justify-content: center;
         }
 
         .table-of-contents li {
-            margin-bottom: 8px;
+            margin-bottom: 0; /* Removed extra margin */
         }
 
         .table-of-contents a {
             display: block;
-            background: linear-gradient(45deg, #4a4a60, #5a5a70); /* Darker link background */
-            color: #fff;
-            padding: 10px 20px;
+            background: linear-gradient(45deg, #3A2A3A, #4A3A4A); /* Slightly lighter link background */
+            color: #FF00FF; /* Magenta text */
+            padding: 12px 25px;
             border-radius: 25px;
             text-decoration: none;
-            transition: background 0.3s ease, transform 0.3s ease;
-            font-weight: 500;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 600;
+            border: 1px solid rgba(128, 0, 128, 0.2);
         }
 
         .table-of-contents a:hover {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            transform: translateY(-2px);
+            background: linear-gradient(45deg, #8A2BE2, #FF00FF);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+            color: #fff; /* White text on hover */
         }
     </style>
 </head>
@@ -482,7 +594,8 @@
 
     <div class="floating-nav" id="floatingNav">
         <div class="nav-dot active" data-section="header"></div>
-        <div class="nav-dot" data-section="table-of-contents"></div> <div class="nav-dot" data-section="about"></div>
+        <div class="nav-dot" data-section="table-of-contents"></div>
+        <div class="nav-dot" data-section="about"></div>
         <div class="nav-dot" data-section="skills"></div>
         <div class="nav-dot" data-section="experience"></div>
         <div class="nav-dot" data-section="certifications"></div>
@@ -493,7 +606,7 @@
     <div class="container">
         <header id="header">
             <div class="profile-img">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user-tie"></i> <!-- More professional icon -->
             </div>
             <h1>Rajesh Tiwari</h1>
             <div class="subtitle">Sr. DevOps & Cloud Infrastructure Engineer</div>
@@ -716,21 +829,21 @@
         <section class="section" id="certifications">
             <h2>Certifications</h2>
             <div class="certifications-grid">
-                <div class="cert-item">
-                    <i class="fas fa-certificate" style="font-size: 2em; margin-bottom: 15px;"></i>
+                <a href="https://www.credly.com/badges/f001445e-2c65-4b1e-9026-80e9c3442ed6/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
+                    <img src="http://googleusercontent.com/file_content/3" alt="HashiCorp Certified: Terraform Associate (003) Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=Terraform';" />
                     <h3>HashiCorp Certified: Terraform Associate (003)</h3>
                     <div class="cert-date">June 2025</div>
-                </div>
-                <div class="cert-item">
-                    <i class="fab fa-aws" style="font-size: 2em; margin-bottom: 15px;"></i>
+                </a>
+                <a href="https://www.credly.com/badges/f9b44766-1ab5-4c75-81ef-adc52bb592a2/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
+                    <img src="http://googleusercontent.com/file_content/2" alt="AWS Certified Solutions Architect – Professional Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=AWS';" />
                     <h3>AWS Certified Solutions Architect – Professional</h3>
                     <div class="cert-date">September 2023</div>
-                </div>
-                <div class="cert-item">
-                    <i class="fas fa-dharmachakra" style="font-size: 2em; margin-bottom: 15px;"></i>
+                </a>
+                <a href="https://www.credly.com/badges/683ee129-5faf-4838-817d-ca5a8f0a8b3d/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
+                    <img src="http://googleusercontent.com/file_content/1" alt="CKA: Certified Kubernetes Administrator Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=CKA';" />
                     <h3>CKA: Certified Kubernetes Administrator</h3>
                     <div class="cert-date">August 2023</div>
-                </div>
+                </a>
             </div>
         </section>
 
@@ -781,7 +894,7 @@
         </section>
 
         <div class="cta-section">
-            <h2>Let's Work Together</h2>
+            <h2>Let's Connect!</h2>
             <p>Ready to take your cloud infrastructure to the next level? Let's discuss how I can help optimize your DevOps processes and build scalable, reliable systems.</p>
             <a href="mailto:rajtiwari10091995@gmail.com" class="cta-button">
                 <i class="fas fa-envelope"></i> Get In Touch
@@ -807,7 +920,7 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) {
+                if (scrollY >= (sectionTop - 200)) { // Offset for active state
                     current = section.getAttribute('id');
                 }
             });
@@ -831,7 +944,7 @@
             });
         });
 
-        // Animation on scroll
+        // Animation on scroll (Intersection Observer)
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -842,11 +955,15 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                } else {
+                    // Optional: Reset animation when out of view
+                    // entry.target.style.opacity = '0';
+                    // entry.target.style.transform = 'translateY(50px)';
                 }
             });
         }, observerOptions);
 
-        // Observe all sections
+        // Observe all sections for fade-in effect
         sections.forEach(section => {
             section.style.opacity = '0';
             section.style.transform = 'translateY(50px)';
@@ -854,24 +971,24 @@
             observer.observe(section);
         });
 
-        // Add some interactive elements
+        // Interactive elements: Skill tags
         document.querySelectorAll('.skill-tag').forEach(tag => {
             tag.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.1)';
-                this.style.transition = 'transform 0.2s ease';
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 0 15px rgba(255, 0, 255, 0.7)'; /* Magenta glow */
             });
             tag.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
             });
         });
 
-
-        // Canvas Animation
+        // Canvas Animation - Tech Grid / Particles (AI Theme)
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
         let animationFrameId;
         let particles = [];
-        const particleCount = 70;
+        const particleCount = 100; // More particles
         let mouseX = 0;
         let mouseY = 0;
         let hoverEffectActive = false;
@@ -889,45 +1006,64 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = 'rgba(102, 126, 234, ' + (Math.random() * 0.5 + 0.2) + ')'; // Blue-purple tones
+                this.size = Math.random() * 1.5 + 0.5; // Smaller, more numerous
+                this.speedX = (Math.random() * 0.5 - 0.25) * 0.5; // Slower movement
+                this.speedY = (Math.random() * 0.5 - 0.25) * 0.5;
+                this.color = 'rgba(138, 43, 226, ' + (Math.random() * 0.4 + 0.1) + ')'; // Blue Violet tones
+                this.trail = [];
+                this.trailLength = Math.floor(Math.random() * 10) + 5; // Variable trail length
             }
 
             update() {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+                // Wrap around edges
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
 
-                // Hover effect: particles move away from mouse
+                // Add current position to trail
+                this.trail.push({ x: this.x, y: this.y });
+                if (this.trail.length > this.trailLength) {
+                    this.trail.shift();
+                }
+
+                // Hover effect: particles move away from mouse and create a ripple
                 if (hoverEffectActive) {
                     const dx = this.x - mouseX;
                     const dy = this.y - mouseY;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    const repulsionRadius = 100;
-                    const repulsionStrength = 0.5;
+                    const repulsionRadius = 150; // Larger repulsion area
+                    const repulsionStrength = 2; // Stronger repulsion
 
                     if (distance < repulsionRadius) {
                         const angle = Math.atan2(dy, dx);
-                        this.x += Math.cos(angle) * repulsionStrength;
-                        this.y += Math.sin(angle) * repulsionStrength;
+                        this.x += Math.cos(angle) * repulsionStrength * (1 - distance / repulsionRadius);
+                        this.y += Math.sin(angle) * repulsionStrength * (1 - distance / repulsionRadius);
                     }
                 }
             }
 
             draw() {
+                // Draw particle body (square)
                 ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+
+                // Draw trail
+                for (let i = 0; i < this.trail.length; i++) {
+                    const alpha = (i / this.trail.length) * 0.5; // Fade out trail
+                    ctx.fillStyle = 'rgba(255, 0, 255, ' + alpha + ')'; // Magenta for trail
+                    ctx.fillRect(this.trail[i].x, this.trail[i].y, this.size * 0.8, this.size * 0.8);
+                }
             }
         }
 
         function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            // Draw connections between close particles
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
@@ -937,8 +1073,8 @@
                         (particles[i].x - particles[j].x) ** 2 +
                         (particles[i].y - particles[j].y) ** 2
                     );
-                    if (distance < 100) { // Connect particles if close
-                        ctx.strokeStyle = 'rgba(102, 126, 234, ' + (1 - (distance / 100)) * 0.3 + ')';
+                    if (distance < 80) { // Connect particles if close
+                        ctx.strokeStyle = 'rgba(255, 0, 255, ' + (1 - (distance / 80)) * 0.15 + ')'; // Fainter magenta lines
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
@@ -950,6 +1086,7 @@
             animationFrameId = requestAnimationFrame(animateParticles);
         }
 
+        // Event Listeners for Canvas
         window.addEventListener('resize', resizeCanvas);
         
         canvas.addEventListener('mousemove', (e) => {
@@ -959,12 +1096,15 @@
 
         canvas.addEventListener('mouseenter', () => {
             hoverEffectActive = true;
+            canvas.style.opacity = '0.7'; // Canvas becomes more prominent on hover
         });
 
         canvas.addEventListener('mouseleave', () => {
             hoverEffectActive = false;
+            canvas.style.opacity = '0.4'; // Return to subtle
         });
 
+        // Initialize canvas and animation
         resizeCanvas();
         animateParticles();
 
