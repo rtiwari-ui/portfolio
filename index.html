@@ -1104,9 +1104,15 @@
             canvas.style.opacity = '0.4'; // Return to subtle
         });
 
-        // Initialize canvas and animation
-        resizeCanvas();
-        animateParticles();
+        // Initialize canvas and animation on window load
+        window.onload = function() {
+            try {
+                resizeCanvas();
+                animateParticles();
+            } catch (error) {
+                console.error("Error initializing canvas animation:", error);
+            }
+        };
 
     </script>
 </body>
