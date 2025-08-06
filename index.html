@@ -25,16 +25,17 @@
         }
     </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-black"> <!-- Solid black background -->
     <canvas id="background-canvas"></canvas>
 
-    <div id="resume-content-container" class="relative z-10 p-4 sm:p-8 md:p-12 lg:p-16 bg-gradient-to-br from-transparent via-purple-900/20 to-blue-900/20 min-h-screen text-gray-100">
+    <!-- Main content container with solid background and white text -->
+    <div id="resume-content-container" class="relative z-10 p-4 sm:p-8 md:p-12 lg:p-16 bg-black min-h-screen text-white">
         <!-- Content will be dynamically inserted here by JavaScript -->
     </div>
 
     <!-- Return to Top Button (initially hidden, shown by JS) -->
     <button id="scrollToTopBtn"
-        class="fixed bottom-8 right-8 bg-teal-500 hover:bg-teal-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 z-50 hidden"
+        class="fixed bottom-8 right-8 bg-emerald-600 hover:bg-emerald-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-opacity-75 z-50 hidden"
         aria-label="Scroll to top">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -207,16 +208,17 @@
         resizeCanvas(); // Initial resize
 
         const particles = [];
-        const numParticles = isMobile ? 50 : 100;
+        const numParticles = isMobile ? 150 : 300; // Even more particles for a denser network
 
         class Particle {
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = Math.random() * 0.5 - 0.25;
+                this.size = Math.random() * 1.5 + 0.5; // Smaller particles for nodes
+                this.speedX = Math.random() * 0.5 - 0.25; // Slower, subtle movement
                 this.speedY = Math.random() * 0.5 - 0.25;
-                this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
+                // Neon green with varying opacity for a subtle glow
+                this.color = `rgba(51, 255, 51, ${Math.random() * 0.4 + 0.1})`;
             }
 
             update() {
@@ -243,7 +245,8 @@
 
         const animateCanvas = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            // Very subtle black trail for smooth animation over black background
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             particles.forEach(particle => {
@@ -257,9 +260,10 @@
                     const dy = particles[a].y - particles[b].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    if (distance < 100) {
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - (distance / 1000)})`;
-                        ctx.lineWidth = 0.5;
+                    if (distance < 100) { // Connection distance for network lines
+                        // Neon green lines, varying opacity based on distance
+                        ctx.strokeStyle = `rgba(51, 255, 51, ${0.3 - (distance / 300)})`;
+                        ctx.lineWidth = 0.7; // Thin lines for network feel
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(particles[b].x, particles[b].y);
@@ -299,23 +303,23 @@
             // Header Section
             htmlContent += `
                 <header class="text-center mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <img src="${resumeData.personal.profilePic}" alt="Profile" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-teal-400 shadow-lg object-cover">
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-2 animate-pulse">
+                    <img src="${resumeData.personal.profilePic}" alt="Profile" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-lime-400 shadow-lg object-cover">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-2 animate-pulse">
                         ${resumeData.personal.name}
                     </h1>
-                    <p class="text-xl sm:text-2xl text-gray-200 mb-4 font-light">
+                    <p class="text-xl sm:text-2xl text-white mb-4 font-light">
                         ${resumeData.personal.title}
                     </p>
                     <div class="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
-                        <a href="tel:${resumeData.personal.phone}" class="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+                        <a href="tel:${resumeData.personal.phone}" class="flex items-center text-white hover:text-lime-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                             ${resumeData.personal.phone}
                         </a>
-                        <a href="mailto:${resumeData.personal.email}" class="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+                        <a href="mailto:${resumeData.personal.email}" class="flex items-center text-white hover:text-lime-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 4v7a2 2 0 002 2h14a2 2 0 002-2v-7m-18 0l-2 2v-7a2 2 0 00-2-2h-1a2 2 0 00-2 2v7l-2-2" /></svg>
                             ${resumeData.personal.email}
                         </a>
-                        <a href="${resumeData.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+                        <a href="${resumeData.personal.linkedin}" target="_blank" rel="noopener noreferrer" class="flex items-center text-white hover:text-lime-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                             LinkedIn
                         </a>
@@ -323,13 +327,30 @@
                 </header>
             `;
 
+            // Index Section
+            htmlContent += `
+                <nav class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2 text-center">
+                        Sections
+                    </h2>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="scrollToSection('about-me')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">About Me</button>
+                        <button onclick="scrollToSection('skills')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">Skills</button>
+                        <button onclick="scrollToSection('work-history')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">Work History</button>
+                        <button onclick="scrollToSection('education')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">Education</button>
+                        <button onclick="scrollToSection('certifications')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">Certifications</button>
+                        <button onclick="scrollToSection('interests')" class="px-4 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium transition-colors duration-300 shadow-md">Interests</button>
+                    </div>
+                </nav>
+            `;
+
             // About/Summary Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-6 border-b-2 border-purple-500 pb-2">
+                <section id="about-me" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         About Me
                     </h2>
-                    <p class="text-lg leading-relaxed text-gray-300">
+                    <p class="text-lg leading-relaxed text-white">
                         ${resumeData.summary}
                     </p>
                 </section>
@@ -337,13 +358,13 @@
 
             // Skills Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-500 mb-6 border-b-2 border-blue-500 pb-2">
+                <section id="skills" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         Skills
                     </h2>
                     <div class="flex flex-wrap gap-3 justify-center">
                         ${resumeData.skills.map(skill => `
-                            <span class="bg-white bg-opacity-15 text-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md">
+                            <span class="bg-white bg-opacity-15 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md">
                                 ${skill}
                             </span>
                         `).join('')}
@@ -353,20 +374,20 @@
 
             // Work History Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 mb-6 border-b-2 border-green-500 pb-2">
+                <section id="work-history" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         Work History
                     </h2>
                     <div class="space-y-8">
                         ${resumeData.workHistory.map(job => `
-                            <div class="bg-white bg-opacity-5 p-6 rounded-lg shadow-inner border border-gray-700 hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-1">
-                                <h3 class="text-xl sm:text-2xl font-semibold text-teal-300 mb-1">
+                            <div class="bg-white bg-opacity-5 p-6 rounded-lg shadow-inner border border-gray-700 hover:border-lime-500 transition-all duration-300 transform hover:-translate-y-1">
+                                <h3 class="text-xl sm:text-2xl font-semibold text-lime-300 mb-1">
                                     ${job.title} at ${job.company}
                                 </h3>
-                                <p class="text-gray-400 text-sm mb-2">
+                                <p class="text-white text-sm mb-2">
                                     ${job.location} | ${job.dates}
                                 </p>
-                                <ul class="list-disc list-inside space-y-1 text-gray-300 text-base">
+                                <ul class="list-disc list-inside space-y-1 text-white text-base">
                                     ${job.description.map(point => `<li>${point}</li>`).join('')}
                                 </ul>
                             </div>
@@ -377,17 +398,17 @@
 
             // Education Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6 border-b-2 border-yellow-500 pb-2">
+                <section id="education" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         Education
                     </h2>
                     <div class="space-y-4">
                         ${resumeData.education.map(edu => `
-                            <div class="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-1">
-                                <h3 class="text-xl font-semibold text-orange-300">
+                            <div class="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-lime-500 transition-all duration-300 transform hover:-translate-y-1">
+                                <h3 class="text-xl font-semibold text-lime-300">
                                     ${edu.degree}
                                 </h3>
-                                <p class="text-gray-400">
+                                <p class="text-white">
                                     ${edu.institution}, ${edu.location}
                                 </p>
                             </div>
@@ -398,23 +419,23 @@
 
             // Certifications Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500 mb-6 border-b-2 border-red-500 pb-2">
+                <section id="certifications" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         Certifications
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         ${resumeData.certifications.map(cert => `
-                            <div class="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-pink-500 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center">
+                            <div class="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-lime-500 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center">
                                 <img
                                     src="${cert.image}"
                                     alt="${cert.name}"
                                     class="w-24 h-24 sm:w-32 sm:h-32 rounded-lg mb-3 object-contain border border-gray-600 p-1"
                                     onerror="this.onerror=null; this.src='https://placehold.co/120x120/555/fff?text=${cert.name.split(' ')[0]}';"
                                 />
-                                <h3 class="text-lg font-semibold text-pink-300 mt-2">
+                                <h3 class="text-lg font-semibold text-lime-300 mt-2">
                                     ${cert.name}
                                 </h3>
-                                <p class="text-gray-400 text-sm">${cert.date}</p>
+                                <p class="text-white text-sm">${cert.date}</p>
                             </div>
                         `).join('')}
                     </div>
@@ -423,13 +444,13 @@
 
             // Interests Section
             htmlContent += `
-                <section class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 mb-6 border-b-2 border-indigo-500 pb-2">
+                <section id="interests" class="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-300 to-emerald-400 mb-6 border-b-2 border-emerald-500 pb-2">
                         Interests
                     </h2>
                     <div class="flex flex-wrap gap-3 justify-center">
                         ${resumeData.interests.map(interest => `
-                            <span class="bg-white bg-opacity-15 text-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md">
+                            <span class="bg-white bg-opacity-15 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md">
                                 ${interest}
                             </span>
                         `).join('')}
@@ -439,13 +460,21 @@
 
             // Footer
             htmlContent += `
-                <footer class="text-center text-gray-500 text-sm mt-12 p-4 rounded-xl shadow-lg bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm">
+                <footer class="text-center text-white text-sm mt-12 p-4 rounded-xl shadow-lg bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm">
                     <p>&copy; ${new Date().getFullYear()} ${resumeData.personal.name}. All rights reserved.</p>
                 </footer>
             `;
 
             container.innerHTML = htmlContent;
         };
+
+        // Function to scroll to a section
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
         // Initialize on window load
         window.onload = function() {
