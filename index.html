@@ -1,943 +1,459 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rajesh Tiwari - Sr. DevOps & Cloud Infrastructure Engineer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Variables for easy theme management */
-        :root {
-            --primary-color: #58A6FF; /* GitHub Blue */
-            --secondary-color: #3FB950; /* GitHub Green */
-            --accent-color: #F85149; /* GitHub Red */
-            --text-light: #C9D1D9; /* Light Gray */
-            --text-medium: #8B949E; /* Medium Gray */
-            --bg-dark: #0D1117; /* GitHub Dark BG */
-            --bg-medium: #161B22; /* GitHub Slightly Lighter BG */
-            --section-bg: rgba(22, 27, 34, 0.95);
-            --card-bg: rgba(13, 17, 23, 0.8);
-            --glow-blue: rgba(88, 166, 255, 0.2);
-            --glow-green: rgba(63, 185, 80, 0.2);
-        }
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import ReactDOM from 'react-dom/client';
 
-        /* General Reset & Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+// Main App component
+const App = () => {
+  const canvasRef = useRef(null); // Re-introducing canvasRef
+  const [isMobile, setIsMobile] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false); // State for scroll button visibility
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: var(--bg-dark);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+  // Data for the resume
+  const resumeData = {
+    personal: {
+      name: "RAJESH TIWARI",
+      title: "Sr. DevOps Engineer",
+      address: "Indore, India 452006",
+      phone: "(+91) 8517011341",
+      email: "rajtiwari10091995@gmail.com",
+      linkedin: "https://www.linkedin.com/in/rajesh-tiwari-43984681",
+      dob: "09/10/1995",
+      maritalStatus: "Married",
+      nationality: "Indian",
+      profilePic: "https://placehold.co/150x150/553c9a/ffffff?text=Profile", // Placeholder for profile picture
+    },
+    summary: "Seasoned and results-driven Sr. DevOps & Cloud Infrastructure Engineer with 10+ years of hands-on experience in architecting, automating, and optimizing mission-critical deployments across AWS, Google Cloud Platform (GCP), and Oracle Cloud Infrastructure (OCI). Proven expertise in building scalable, secure, and cost-efficient cloud-native Infrastructure. Strong background in SRE principles, platform engineering, and DevSecOps, with a focus on reliability, observability and continuous improvement. Adept at leading cross-functional teams, driving cloud modernization, and enabling high-performance delivery through automation, governance, and infrastructure best practices.",
+    skills: [
+      "Cloud Platforms (AWS, GCP, OCI)",
+      "Infrastructure as Code (Terraform, Ansible)",
+      "CI/CD Pipelines (Jenkins, GitHub Actions, Cloud Build, ArgoCD)",
+      "Containerization & Orchestration (Docker, Kubernetes EKS/GKE)",
+      "Monitoring & Observability (Datadog, Instana, Prometheus, Grafana, CloudWatch, Cloud Logging, ELK)",
+      "Configuration Management (Ansible, Helm, Packer)",
+      "Automated Deployment Techniques & Technologies (GitHub Actions, GitOps, Harness)",
+      "Version Control (Git, GitHub, GitLab, BitBucket)",
+      "Reporting & Documentation (Confluence, JIRA)",
+    ],
+    workHistory: [
+      {
+        title: "Sr. DevOps Engineer",
+        company: "FiftyFive Technologies",
+        location: "Indore, India",
+        dates: "May 2025 - Current",
+        description: [
+          "Optimized AWS cloud resource usage by analyzing cost metrics and recommending right-sized configurations to improve cost-efficiency.",
+          "Maintained robust monitoring systems for applications and infrastructure using tools like CloudWatch, Prometheus, and Grafana.",
+          "Increased system reliability and minimized downtime by proactively conducting root cause analysis (RCA) and troubleshooting incidents.",
+          "Reduced deployment times by implementing CI/CD pipelines across multiple projects using Jenkins, GitHub Actions, and Ansible.",
+          "Streamlined infrastructure management through automation using Terraform, Kubernetes, and Ansible, supporting consistent and scalable deployments.",
+          "Contributed to architecture design decisions, ensuring scalable, modular, and future-ready infrastructure for application growth.",
+          "Mentored junior engineers, sharing best practices and elevating team performance through coaching and hands-on support.",
+          "Standardized development environments using Docker, enabling consistent and platform-agnostic deployments across teams.",
+          "Promoted knowledge sharing by documenting processes, best practices, and lessons learned to build a shared internal DevOps knowledge base.",
+          "Conducted regular infrastructure performance assessments, identifying bottlenecks and optimizing compute, storage, and network configurations.",
+          "Championed a DevOps culture, fostering seamless collaboration between development, QA, and operations teams to accelerate delivery and improve quality.",
+        ],
+      },
+      {
+        title: "DevOps Engineer / SRE",
+        company: "Volansys Technologies",
+        location: "Ahmedabad (Remote)",
+        dates: "Jun 2022 - Apr 2025",
+        description: [
+          "Seasoned DevOps Engineer and Cloud Solutions Architect with deep expertise in designing, building, and automating secure, scalable, and cost-optimized infrastructure on Amazon Web Services (AWS).",
+          "Architected cloud-native, highly available systems using EC2, EKS, Lambda, CloudFront, VPC, IAM, ALB/NLB, S3, and RDS, aligned with the AWS Well-Architected Framework and compliance standards.",
+          "Developed Infrastructure as Code (IaC) with Terraform and AWS CloudFormation, ensuring consistent, version-controlled provisioning across environments.",
+          "Built and optimized CI/CD pipelines using Jenkins, GitHub Actions, and Ansible, improving deployment speed and enforcing quality gates for microservices.",
+          "Implemented centralized monitoring and logging using CloudWatch, Prometheus, Grafana, and Splunk, enhancing observability and reducing MTTR.",
+          "Embedded DevSecOps practices by integrating tools like Snyk and Trivy, and enforcing secure access with IAM policies, Secrets Manager, and encryption techniques.",
+          "Led cloud cost optimization efforts through resource usage analysis, auto-scaling strategies, and Reserved Instance planning.",
+          "Created detailed architecture diagrams, runbooks, and technical documentation using Confluence and Eraser.io to promote transparency and collaboration.",
+          "Advocate for automation-first, self-service platforms, and platform engineering principles to scale DevOps capabilities across teams.",
+        ],
+      },
+      {
+        title: "IT & Cloud Support Specialist",
+        company: "TaskUs",
+        location: "Indore (Remote)",
+        dates: "Sep 2020 - Jun 2022",
+        description: [
+          "Automated cloud infrastructure provisioning using Terraform, ensuring consistency, version control, and repeatable deployments across development, staging, and production environments.",
+          "Conducted Root Cause Analysis (RCA) for service downtime, implemented proactive monitoring and auto-healing strategies to improve system reliability and uptime.",
+          "Enhanced cloud security posture through automated vulnerability assessments using Amazon Inspector, integrated into CI/CD workflows for early detection and remediation.",
+          "Built and maintained immutable infrastructure, including server builds, application deployments, OS upgrades, and automated patch management using tools like Ansible and Packer.",
+          "Addressed critical issues such as unexpected shutdowns, disk failures, and system errors, using CloudWatch logs, metrics, and alerting integrations with Slack/email.",
+          "Set up and managed CI/CD pipelines using Jenkins, automating build, test, and deployment stages across microservice applications in containerized environments.",
+          "Documented runbooks, deployment guides, and SOPs using Confluence, contributing to an internal knowledge base for DevOps practices and troubleshooting.",
+          "Applied strong knowledge of DevSecOps, integrating security scanning (e.g., Snyk, Trivy) into CI/CD workflows to ensure compliance and vulnerability mitigation.",
+          "Collaborated with development, QA, and SRE teams to promote Agile DevOps culture, improve developer productivity, and support release engineering processes.",
+        ],
+      },
+      {
+        title: "Senior Analyst",
+        company: "Continuum Global Services",
+        location: "Indore",
+        dates: "Jul 2018 - Aug 2020",
+        description: [
+          "Analyzed system performance and contributed to optimization efforts on AI-powered Linux platforms, improving stability and responsiveness.",
+          "Assisted in CI/CD pipeline implementation using Jenkins, and supported infrastructure automation through Terraform scripts.",
+          "Supported version control activities using Git and GitLab, including branching, tagging, and release coordination aligned with Agile workflows.",
+          "Contributed to Docker-based deployment workflows, ensuring image build consistency and alignment with release standards.",
+          "Provided support for Kubernetes environments, focusing on automated deployments, scalability, and availability analysis.",
+          "Collaborated with cross-functional teams to maintain documentation, track progress, and report on DevOps process improvements and outcomes.",
+        ],
+      },
+      {
+        title: "Back Office Executive",
+        company: "Teleperformance",
+        location: "Indore",
+        dates: "Aug 2015 - Jul 2018",
+        description: [
+          "Managed quality assurance programme, including on-site evaluation, internal audits and customer surveys.",
+          "Incident, change and problem management skills.",
+          "Root cause analysis.",
+          "Documentation of best practices.",
+          "Creation and update of technical documentation.",
+        ],
+      },
+    ],
+    education: [
+      {
+        degree: "Bachelor of Computer Applications",
+        institution: "Shri Vaishnav Institute of Management",
+        location: "Indore, M.P.",
+      },
+      {
+        degree: "Higher Secondary",
+        institution: "Ideal Academy",
+        location: "Indore, M.P.",
+      },
+      {
+        degree: "High School",
+        institution: "Ideal Academy",
+        location: "Indore, M.P.",
+      },
+    ],
+    certifications: [
+      {
+        name: "CKA: Certified Kubernetes Administrator",
+        date: "Aug 2023",
+        image: "https://placehold.co/120x120/4a0e7e/ffffff?text=CKA" // Placeholder for CKA image
+      },
+      {
+        name: "AWS Certified Solutions Architect - Professional",
+        date: "Sep 2023",
+        image: "https://placehold.co/120x120/FF9900/ffffff?text=AWS+SA" // Placeholder for AWS SA image
+      },
+      {
+        name: "HashiCorp Certified: Terraform Associate (003)",
+        date: "Jun 2025",
+        image: "https://placehold.co/120x120/624e89/ffffff?text=Terraform" // Placeholder for Terraform image
+      },
+    ],
+    interests: [
+      "Indore Sports - Table Tennis, Chess",
+      "Outdoor Sports - Cricket, Volleyball",
+      "Space Exploration & theories",
+    ],
+  };
 
-        /* Dynamic Background */
-        .background-dots {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
+  // Canvas animation logic (re-introduced)
+  const initCanvasAnimation = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-        .dot {
-            position: absolute;
-            background: var(--primary-color);
-            border-radius: 50%;
-            opacity: 0;
-            animation: dotFlow 15s infinite ease-in-out;
-        }
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
 
-        @keyframes dotFlow {
-            0% {
-                transform: translate(var(--x-start, 0), var(--y-start, 0)) scale(0);
-                opacity: 0;
-            }
-            10% { opacity: 0.1; }
-            80% { opacity: 0.1; }
-            100% {
-                transform: translate(var(--x-end, 0), var(--y-end, 0)) scale(var(--scale-end, 1));
-                opacity: 0;
-            }
-        }
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        /* Header Section */
-        header {
-            background: var(--section-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            box-shadow: 0 15px 40px var(--glow-blue), 0 0 50px var(--glow-blue);
-            margin-bottom: 40px;
-            animation: headerEntrance 1.2s ease-out forwards;
-            border: 1px solid var(--glow-blue);
-            perspective: 1000px; /* For 3D transform */
-            transform-style: preserve-3d;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        @keyframes headerEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(-80px) rotateX(-90deg);
-                filter: blur(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-                filter: blur(0);
-            }
-        }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas(); // Initial resize
 
-        .profile-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 70px;
-            color: #fff;
-            box-shadow: 0 0 30px var(--glow-blue), 0 0 60px var(--glow-green);
-            animation: pulse 2.5s infinite ease-in-out alternate;
-            position: relative;
-            z-index: 10;
-        }
+    const particles = [];
+    const numParticles = isMobile ? 50 : 100; // Fewer particles on mobile
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 25px var(--glow-blue); }
-            100% { transform: scale(1.05); box-shadow: 0 0 40px var(--glow-blue), 0 0 20px var(--glow-green); }
-        }
-        
-        .header-content {
-            animation: fadeInScale 1.5s ease-out forwards;
-        }
+    // Particle class for the animation
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 2 + 0.5; // Smaller particles
+        this.speedX = Math.random() * 0.5 - 0.25; // Slower movement
+        this.speedY = Math.random() * 0.5 - 0.25;
+        this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`; // Faint white
+      }
 
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-        h1 {
-            color: var(--primary-color);
-            font-size: 3.2em;
-            margin-bottom: 10px;
-            font-weight: 900;
-            text-shadow: 0 0 15px var(--glow-blue);
-            letter-spacing: 2px;
-        }
+        // Wrap particles around the screen
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+      }
 
-        .subtitle {
-            color: var(--secondary-color);
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+    // Initialize particles
+    for (let i = 0; i < numParticles; i++) {
+      particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-medium);
-            text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
-        }
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+      ctx.fillStyle = 'rgba(0,0,0,0.1)'; // Faint trail effect for dark background
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        .contact-item i {
-            font-size: 1.2em;
-        }
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
 
-        .contact-item:hover {
-            color: var(--primary-color);
-            transform: translateY(-5px) scale(1.05);
-            text-shadow: 0 0 10px var(--glow-blue);
-        }
+      // Draw subtle lines between nearby particles
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
-        /* Section Styling */
-        .section {
-            background: var(--section-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px var(--glow-blue), 0 0 40px var(--glow-blue);
-            animation: sectionFadeIn 1s ease-out forwards;
-            border: 1px solid var(--glow-blue);
+          if (distance < 100) { // Connect particles within 100px
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - (distance / 1000)})`; // Fainter lines
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
         }
+      }
 
-        .section h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-            font-weight: 900;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), #A371F7);
-            background-size: 400% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px var(--glow-blue);
-            animation: textGradientShift 8s linear infinite;
-        }
+      animationFrameId = requestAnimationFrame(animate);
+    };
 
-        @keyframes textGradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
+    animate();
 
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            border-radius: 2px;
-            animation: underlinePulse 1.5s infinite alternate;
-        }
+    // Cleanup function
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, [isMobile]);
 
-        @keyframes underlinePulse {
-            0% { width: 60px; opacity: 0.7; }
-            100% { width: 90px; opacity: 1; }
-        }
-        
-        .about-text {
-            font-size: 1.1em;
-            text-align: center;
-            color: var(--text-medium);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
-            position: relative;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 15px;
-        }
-        
-        .about-text::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border-radius: 25px;
-            border: 2px dashed var(--secondary-color);
-            opacity: 0.2;
-            animation: borderDash 10s linear infinite;
-        }
-        
-        @keyframes borderDash {
-            0% { stroke-dashoffset: 0; }
-            100% { stroke-dashoffset: 1000; }
-        }
-        
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .skill-category {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid var(--glow-blue);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease;
-        }
+  // Handle scroll to show/hide button
+  const handleScroll = useCallback(() => {
+    if (window.scrollY > 300) { // Show button after scrolling 300px
+      setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
+    }
+  }, []);
 
-        .skill-category:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px var(--glow-blue), 0 0 40px var(--glow-green);
-        }
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Smooth scroll animation
+    });
+  };
 
-        .skill-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+  useEffect(() => {
+    // Check for mobile on mount
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
 
-        .skill-tag {
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            color: #fff;
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.95em;
-            font-weight: 600;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-tag:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 0 20px var(--glow-blue);
-        }
+    initCanvasAnimation(); // Re-initialize canvas animation
 
-        .skill-tag::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.5s ease;
-        }
-        
-        .skill-tag:hover::before {
-            left: 100%;
-        }
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
 
-        /* Experience Section */
-        .experience-item {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            border: 1px solid var(--glow-blue);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease, border-color 0.4s ease;
-        }
-        
-        .experience-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px var(--glow-blue), 0 0 40px var(--glow-green);
-            border-color: var(--secondary-color);
-        }
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll); // Clean up scroll listener
+    };
+  }, [initCanvasAnimation, handleScroll]); // Added initCanvasAnimation back to dependencies
 
-        .job-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .job-title {
-            color: var(--primary-color);
-            font-size: 1.5em;
-            font-weight: 700;
-        }
-        
-        .job-period {
-            background: linear-gradient(45deg, var(--accent-color), #A371F7);
-            color: #fff;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: 600;
-            animation: pulseBg 3s infinite ease-in-out;
-        }
-        
-        @keyframes pulseBg {
-            0% { box-shadow: 0 0 5px var(--accent-color); }
-            50% { box-shadow: 0 0 10px var(--accent-color), 0 0 10px #A371F7; }
-            100% { box-shadow: 0 0 5px var(--accent-color); }
-        }
+  return (
+    <div className="min-h-screen font-inter text-gray-100 relative overflow-hidden bg-gray-900"> {/* Added bg-gray-900 for a base dark background */}
+      {/* Canvas for background animation */}
+      <canvas ref={canvasRef} className="absolute inset-0 z-0"></canvas>
 
-        .company {
-            color: var(--text-medium);
-            font-size: 1.1em;
-            margin-bottom: 15px;
-        }
-        
-        .job-highlights {
-            list-style: none;
-        }
-        
-        .job-highlights li {
-            margin-bottom: 8px;
-            padding-left: 25px;
-            position: relative;
-            color: var(--text-medium);
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-        
-        .job-highlights li::before {
-            content: '›';
-            position: absolute;
-            left: 0;
-            color: var(--secondary-color);
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-        
-        .job-highlights li:hover {
-            color: var(--text-light);
-            transform: translateX(5px);
-        }
-        
-        .job-highlights li:hover::before {
-            transform: translateX(5px) rotate(10deg);
-        }
-
-        /* Certifications Section */
-        .certifications-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        
-        .cert-item {
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(63, 185, 80, 0.1));
-            color: var(--text-light);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.3);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--primary-color);
-        }
-        
-        .cert-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(88, 166, 255, 0.5), 0 0 50px rgba(63, 185, 80, 0.5);
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.3), rgba(63, 185, 80, 0.3));
-        }
-        
-        .cert-item img {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-        
-        .cert-item:hover img {
-            transform: rotate(5deg) scale(1.1);
-        }
-
-        /* Education & Interests styling similar to other sections for consistency */
-        
-        /* Floating Navigation Dots */
-        .floating-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-        
-        .nav-dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: rgba(88, 166, 255, 0.3);
-            border: 2px solid rgba(88, 166, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-        }
-        
-        .nav-dot::after {
-            content: attr(data-label);
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--bg-medium);
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: var(--text-light);
-            font-size: 0.9em;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .nav-dot:hover::after {
-            opacity: 1;
-            visibility: visible;
-            right: 30px;
-        }
-        
-        .nav-dot.active {
-            background: var(--primary-color);
-            transform: scale(1.5);
-            box-shadow: 0 0 15px var(--glow-blue);
-        }
-        
-        @media (max-width: 768px) {
-            .floating-nav { display: none; }
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .container { padding: 10px; }
-            header, .section { padding: 20px; }
-            h1 { font-size: 2.5em; }
-            .subtitle { font-size: 1.2em; }
-            .contact-info { gap: 15px; }
-            .job-header { flex-direction: column; align-items: flex-start; }
-            .skills-grid, .certifications-grid { grid-template-columns: 1fr; }
-            .section h2 { font-size: 2.2em; }
-        }
-
-        /* Call to Action */
-        .cta-section {
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #A371F7 100%);
-            color: #fff;
-            border-radius: 20px;
-            margin-top: 40px;
-            box-shadow: 0 20px 40px rgba(248, 81, 73, 0.3);
-            border: 1px solid rgba(248, 81, 73, 0.5);
-            animation: ctaPulse 5s infinite ease-in-out alternate;
-        }
-
-        @keyframes ctaPulse {
-            0% { box-shadow: 0 10px 20px rgba(248, 81, 73, 0.3); }
-            100% { box-shadow: 0 20px 40px rgba(248, 81, 73, 0.5); }
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--bg-medium);
-            color: var(--accent-color);
-            padding: 18px 35px;
-            border-radius: 35px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 25px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid var(--accent-color);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-color);
-            z-index: -1;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease-in-out;
-        }
-        
-        .cta-button:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .cta-button:hover {
-            color: #fff;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(248, 81, 73, 0.5), 0 0 50px rgba(248, 81, 73, 0.3);
-        }
-        
-        /* Return to Top Button */
-        #returnToTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #returnToTopBtn:hover {
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-            transform: translateY(-5px) scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-        
-    </style>
-</head>
-<body>
-    <div class="background-dots" id="backgroundDots"></div>
-    <div class="scroll-indicator">
-        <div class="scroll-progress" id="scrollProgress"></div>
-    </div>
-
-    <div class="floating-nav" id="floatingNav">
-        <div class="nav-dot" data-section="header" data-label="Top"></div>
-        <div class="nav-dot" data-section="table-of-contents" data-label="Contents"></div>
-        <div class="nav-dot" data-section="about" data-label="About"></div>
-        <div class="nav-dot" data-section="skills" data-label="Skills"></div>
-        <div class="nav-dot" data-section="experience" data-label="Experience"></div>
-        <div class="nav-dot" data-section="certifications" data-label="Certifications"></div>
-        <div class="nav-dot" data-section="education" data-label="Education"></div>
-        <div class="nav-dot" data-section="interests" data-label="Interests"></div>
-    </div>
-
-    <div class="container">
-        <header id="header">
-            <div class="profile-img">
-                <i class="fas fa-user-tie"></i>
-            </div>
-            <div class="header-content">
-                <h1>Rajesh Tiwari</h1>
-                <div class="subtitle">Sr. DevOps & Cloud Infrastructure Engineer</div>
-            </div>
-            <div class="contact-info">
-                <a href="mailto:rajesh.tiwari.main@gmail.com" class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    rajesh.tiwari.main@gmail.com
-                </a>
-                <a href="tel:+918517011341" class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    (+91) 8517011341
-                </a>
-                <a href="https://www.linkedin.com/in/rajesh-tiwari-43984b81" target="_blank" class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    LinkedIn Profile
-                </a>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Indore, India
-                </div>
-            </div>
+      {/* Main content container with gradient overlay */}
+      <div className="relative z-10 p-4 sm:p-8 md:p-12 lg:p-16 bg-gradient-to-br from-transparent via-purple-900/20 to-blue-900/20 min-h-screen"> {/* Adjusted gradient for subtle overlay */}
+        {/* Header Section */}
+        <header className="text-center mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          {/* Profile Picture Placeholder */}
+          <img
+            src={resumeData.personal.profilePic}
+            alt="Profile"
+            className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-teal-400 shadow-lg object-cover"
+          />
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 mb-2 animate-pulse">
+            {resumeData.personal.name}
+          </h1>
+          <p className="text-xl sm:text-2xl text-gray-200 mb-4 font-light">
+            {resumeData.personal.title}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm sm:text-base">
+            <a href={`tel:${resumeData.personal.phone}`} className="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+              {resumeData.personal.phone}
+            </a>
+            <a href={`mailto:${resumeData.personal.email}`} className="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-18 4v7a2 2 0 002 2h14a2 2 0 002-2v-7m-18 0l-2 2v-7a2 2 0 00-2-2h-1a2 2 0 00-2 2v7l-2-2" /></svg>
+              {resumeData.personal.email}
+            </a>
+            <a href={resumeData.personal.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-teal-400 transition-colors duration-300 rounded-full px-3 py-1 bg-white bg-opacity-5 hover:bg-opacity-10">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              LinkedIn
+            </a>
+          </div>
         </header>
 
-        <section class="section" id="table-of-contents">
-            <h2>Table of Contents</h2>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#skills">Technical Skills</a></li>
-                <li><a href="#experience">Professional Experience</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#interests">Interests</a></li>
-            </ul>
+        {/* About/Summary Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-6 border-b-2 border-purple-500 pb-2">
+            About Me
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-300">
+            {resumeData.summary}
+          </p>
         </section>
 
-        <section class="section" id="about">
-            <h2>About Me</h2>
-            <div class="about-text">
-                Seasoned and results-driven Sr. DevOps & Cloud Infrastructure Engineer with 10+ years of hands-on experience in architecting, automating, and optimizing mission-critical deployments across AWS, Google Cloud Platform (GCP), and Oracle Cloud Infrastructure (OCI). Proven expertise in building scalable, secure, and cost-efficient cloud-native Infrastructure.
-                <br><br>
-                Strong background in SRE principles, platform engineering, and DevSecOps, with a focus on reliability, observability and continuous improvement. Adept at leading cross-functional teams, driving cloud modernization, and enabling high-performance delivery through automation, governance, and infrastructure best practices.
-            </div>
+        {/* Skills Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-500 mb-6 border-b-2 border-blue-500 pb-2">
+            Skills
+          </h2>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {resumeData.skills.map((skill, index) => (
+              <span
+                key={index}
+                className="bg-white bg-opacity-15 text-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
         </section>
 
-        <section class="section" id="skills">
-            <h2>Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-cloud"></i> Cloud Platforms</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Google Cloud Platform</span>
-                        <span class="skill-tag">Oracle Cloud Infrastructure</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> MLOps</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Kubeflow</span>
-                        <span class="skill-tag">MLflow</span>
-                        <span class="skill-tag">TensorFlow Extended (TFX)</span>
-                        <span class="skill-tag">Data Version Control (DVC)</span>
-                        <span class="skill-tag">Vertex AI</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Infrastructure as Code</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Terraform</span>
-                        <span class="skill-tag">Ansible</span>
-                        <span class="skill-tag">AWS CloudFormation</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-cogs"></i> CI/CD & Automation</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Jenkins</span>
-                        <span class="skill-tag">GitHub Actions</span>
-                        <span class="skill-tag">Cloud Build</span>
-                        <span class="skill-tag">ArgoCD</span>
-                        <span class="skill-tag">GitOps</span>
-                        <span class="skill-tag">Harness</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-container-storage"></i> Containerization</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Kubernetes</span>
-                        <span class="skill-tag">EKS</span>
-                        <span class="skill-tag">GKE</span>
-                        <span class="skill-tag">Helm</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-chart-line"></i> Monitoring & Observability</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Datadog</span>
-                        <span class="skill-tag">Instana</span>
-                        <span class="skill-tag">Prometheus</span>
-                        <span class="skill-tag">Grafana</span>
-                        <span class="skill-tag">CloudWatch</span>
-                        <span class="skill-tag">ELK Stack</span>
-                        <span class="skill-tag">Splunk</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Development Tools</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">GitLab</span>
-                        <span class="skill-tag">BitBucket</span>
-                        <span class="skill-tag">Confluence</span>
-                        <span class="skill-tag">JIRA</span>
-                        <span class="skill-tag">Packer</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="experience">
-            <h2>Professional Experience</h2>
-            <div class="experience-item">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Sr. DevOps Engineer</div>
-                        <div class="company">FiftyFive Technologies, Indore, India</div>
-                    </div>
-                    <span class="job-period">Jan 2022 - Present</span>
-                </div>
-                <ul class="job-highlights">
-                    <li>Led the migration of on-premise infrastructure to AWS, reducing operational costs by 30% and improving scalability.</li>
-                    <li>Designed and implemented a GitOps workflow using ArgoCD and Kubernetes, enabling a 90% reduction in deployment time.</li>
-                    <li>Developed and maintained Terraform modules to provision and manage cloud resources across multiple environments.</li>
-                    <li>Established a comprehensive monitoring and alerting system with Prometheus and Grafana, resulting in a 75% faster incident response time.</li>
+        {/* Work History Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-teal-500 mb-6 border-b-2 border-green-500 pb-2">
+            Work History
+          </h2>
+          <div className="space-y-8">
+            {resumeData.workHistory.map((job, index) => (
+              <div key={index} className="bg-white bg-opacity-5 p-6 rounded-lg shadow-inner border border-gray-700 hover:border-teal-500 transition-all duration-300 transform hover:-translate-y-1">
+                <h3 className="text-xl sm:text-2xl font-semibold text-teal-300 mb-1">
+                  {job.title} at {job.company}
+                </h3>
+                <p className="text-gray-400 text-sm mb-2">
+                  {job.location} | {job.dates}
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-gray-300 text-base">
+                  {job.description.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
                 </ul>
-            </div>
-            </section>
-
-        <section class="section" id="certifications">
-            <h2>Certifications</h2>
-            <div class="certifications-grid">
-                <div class="cert-item">
-                    <img src="https://via.placeholder.com/100/58A6FF/FFFFFF?text=AWS" alt="AWS Certified Solutions Architect">
-                    <h3>AWS Certified Solutions Architect</h3>
-                    <div class="cert-date">Issued: Jan 2023</div>
-                </div>
-                <div class="cert-item">
-                    <img src="https://via.placeholder.com/100/3FB950/FFFFFF?text=GCP" alt="Google Cloud Certified">
-                    <h3>Google Cloud Certified</h3>
-                    <div class="cert-date">Issued: Mar 2022</div>
-                </div>
-                <div class="cert-item">
-                    <img src="https://via.placeholder.com/100/F85149/FFFFFF?text=K8s" alt="Certified Kubernetes Administrator">
-                    <h3>Certified Kubernetes Administrator (CKA)</h3>
-                    <div class="cert-date">Issued: May 2022</div>
-                </div>
-                <div class="cert-item">
-                    <img src="https://via.placeholder.com/100/A371F7/FFFFFF?text=Terraform" alt="HashiCorp Certified: Terraform Associate">
-                    <h3>HashiCorp Certified: Terraform Associate</h3>
-                    <div class="cert-date">Issued: Oct 2021</div>
-                </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section class="section" id="education">
-            <h2>Education</h2>
-            <div class="education-item">
-                <h3>Master of Computer Applications (MCA)</h3>
-                <p>Jawaharlal Nehru Institute of Technology, Bhopal, India</p>
-                <p>2012 - 2015</p>
-            </div>
+        {/* Education Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500 mb-6 border-b-2 border-yellow-500 pb-2">
+            Education
+          </h2>
+          <div className="space-y-4">
+            {resumeData.education.map((edu, index) => (
+              <div key={index} className="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-orange-500 transition-all duration-300 transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold text-orange-300">
+                  {edu.degree}
+                </h3>
+                <p className="text-gray-400">
+                  {edu.institution}, {edu.location}
+                </p>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section class="section" id="interests">
-            <h2>Interests</h2>
-            <div class="interests-list">
-                <div class="interest-item"><i class="fas fa-terminal"></i> Command Line Tools</div>
-                <div class="interest-item"><i class="fas fa-brain"></i> Machine Learning</div>
-                <div class="interest-item"><i class="fas fa-cloud-sun"></i> Cloud-Native Architectures</div>
-                <div class="interest-item"><i class="fas fa-book"></i> Reading Tech Blogs</div>
-            </div>
+        {/* Certifications Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-500 mb-6 border-b-2 border-red-500 pb-2">
+            Certifications
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {resumeData.certifications.map((cert, index) => (
+              <div key={index} className="bg-white bg-opacity-5 p-4 rounded-lg shadow-inner border border-gray-700 hover:border-pink-500 transition-all duration-300 transform hover:-translate-y-1 flex flex-col items-center text-center">
+                <img
+                  src={cert.image}
+                  alt={cert.name}
+                  className="w-24 h-24 sm:w-32 sm:h-32 rounded-lg mb-3 object-contain border border-gray-600 p-1"
+                  onError={(e) => { e.target.onerror = null; e.target.src = `https://placehold.co/120x120/555/fff?text=${cert.name.split(' ')[0]}`; }} // Fallback
+                />
+                <h3 className="text-lg font-semibold text-pink-300 mt-2">
+                  {cert.name}
+                </h3>
+                <p className="text-gray-400 text-sm">{cert.date}</p>
+              </div>
+            ))}
+          </div>
         </section>
-        
-        <div class="cta-section">
-            <h2>Let's build something great together.</h2>
-            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
-            <a href="mailto:rajesh.tiwari.main@gmail.com" class="cta-button">
-                Get in Touch <i class="fas fa-paper-plane"></i>
-            </a>
-        </div>
+
+        {/* Interests Section */}
+        <section className="mb-12 p-6 rounded-xl shadow-lg bg-white bg-opacity-10 backdrop-filter backdrop-blur-sm transform transition-all duration-500 hover:scale-105">
+          <h2 className="text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500 mb-6 border-b-2 border-indigo-500 pb-2">
+            Interests
+          </h2>
+          <div className="flex flex-wrap gap-3 justify-center">
+            {resumeData.interests.map((interest, index) => (
+              <span
+                key={index}
+                className="bg-white bg-opacity-15 text-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-opacity-25 transition-all duration-300 transform hover:scale-105 shadow-md"
+              >
+                {interest}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="text-center text-gray-500 text-sm mt-12 p-4 rounded-xl shadow-lg bg-white bg-opacity-5 backdrop-filter backdrop-blur-sm">
+          <p>&copy; {new Date().getFullYear()} {resumeData.personal.name}. All rights reserved.</p>
+        </footer>
+      </div>
+
+      {/* Return to Top Button */}
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-teal-500 hover:bg-teal-600 text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75 z-50"
+          aria-label="Scroll to top"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
     </div>
-    
-    <button id="returnToTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+  );
+};
 
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Scroll Progress Bar
-        const scrollProgress = document.getElementById('scrollProgress');
-        const sections = document.querySelectorAll('section, header');
-        const floatingNav = document.getElementById('floatingNav');
-        const navDots = document.querySelectorAll('.nav-dot');
-        const returnToTopBtn = document.getElementById('returnToTopBtn');
-
-        document.addEventListener('scroll', () => {
-            // Scroll Progress
-            const totalHeight = document.body.scrollHeight - window.innerHeight;
-            const scrollPosition = window.scrollY;
-            const progress = (scrollPosition / totalHeight) * 100;
-            scrollProgress.style.width = progress + '%';
-
-            // Floating Navigation
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-section') === current) {
-                    dot.classList.add('active');
-                }
-            });
-            
-            // Return to Top Button Visibility
-            if (window.scrollY > 300) {
-                returnToTopBtn.style.display = "flex";
-            } else {
-                returnToTopBtn.style.display = "none";
-            }
-        });
-
-        // Click handler for return to top button
-        returnToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Floating Nav dot click handler
-        floatingNav.addEventListener('click', (e) => {
-            const dot = e.target.closest('.nav-dot');
-            if (dot) {
-                const sectionId = dot.getAttribute('data-section');
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-
-        // Dynamic Dot Background
-        const backgroundDots = document.getElementById('backgroundDots');
-        const dotCount = 50;
-
-        for (let i = 0; i < dotCount; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-
-            const size = Math.random() * 5 + 3;
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
-
-            const xStart = Math.random() * window.innerWidth;
-            const yStart = Math.random() * window.innerHeight;
-            const xEnd = Math.random() * window.innerWidth;
-            const yEnd = Math.random() * window.innerHeight;
-
-            dot.style.setProperty('--x-start', `${xStart}px`);
-            dot.style.setProperty('--y-start', `${yStart}px`);
-            dot.style.setProperty('--x-end', `${xEnd}px`);
-            dot.style.setProperty('--y-end', `${yEnd}px`);
-
-            const duration = Math.random() * 10 + 10;
-            dot.style.animationDuration = `${duration}s`;
-
-            const delay = Math.random() * 10;
-            dot.style.animationDelay = `${delay}s`;
-
-            backgroundDots.appendChild(dot);
-        }
-    </script>
-</body>
-</html>
+export default App;
