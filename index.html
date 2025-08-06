@@ -5,7 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajesh Tiwari - Sr. DevOps & Cloud Infrastructure Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --primary-color: #58A6FF; /* GitHub Blue */
+            --secondary-color: #3FB950; /* GitHub Green */
+            --accent-color: #F85149; /* GitHub Red */
+            --text-light: #C9D1D9; /* Light Gray */
+            --text-medium: #8B949E; /* Medium Gray */
+            --bg-dark: #0D1117; /* GitHub Dark BG */
+            --bg-medium: #161B22; /* GitHub Slightly Lighter BG */
+            --section-bg: rgba(22, 27, 34, 0.95);
+            --card-bg: rgba(13, 17, 23, 0.8);
+            --glow-blue: rgba(88, 166, 255, 0.2);
+            --glow-green: rgba(63, 185, 80, 0.2);
+        }
+
         /* General Reset & Base Styles */
         * {
             margin: 0;
@@ -14,26 +30,46 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #C9D1D9; /* Light gray for readability on dark background (GitHub text color) */
-            background: linear-gradient(135deg, #0D1117 0%, #161B22 100%); /* GitHub dark background gradient */
+            color: var(--text-light);
+            background: var(--bg-dark);
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+            scroll-behavior: smooth;
         }
 
-        /* Canvas Background */
-        canvas {
+        /* Dynamic Background */
+        .background-dots {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.3; /* Adjusted opacity for better visibility on dark theme */
-            transition: opacity 0.5s ease;
+            overflow: hidden;
+        }
+
+        .dot {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0;
+            animation: dotFlow 15s infinite ease-in-out;
+        }
+
+        @keyframes dotFlow {
+            0% {
+                transform: translate(var(--x-start, 0), var(--y-start, 0)) scale(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.1; }
+            80% { opacity: 0.1; }
+            100% {
+                transform: translate(var(--x-end, 0), var(--y-end, 0)) scale(var(--scale-end, 1));
+                opacity: 0;
+            }
         }
 
         /* Main Container */
@@ -42,74 +78,86 @@
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            z-index: 1; /* Ensure content is above canvas */
+            z-index: 2;
         }
-
+        
         /* Header Section */
         header {
-            background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(30, 35, 45, 0.95)); /* Gradient background */
-            backdrop-filter: blur(15px); /* Stronger blur */
+            background: var(--section-bg);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
-            padding: 40px;
+            padding: 50px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05); /* GitHub blue glow shadow */
-            margin-bottom: 30px;
-            animation: slideDown 0.8s ease-out forwards;
-            color: #C9D1D9; /* Light gray text for contrast */
-            border: 1px solid rgba(88, 166, 255, 0.2); /* Subtle GitHub blue border */
-            background-size: 200% 200%; /* For animation */
-            animation: slideDown 0.8s ease-out forwards, gradientShift 10s ease infinite alternate; /* Added gradient animation */
+            box-shadow: 0 15px 40px var(--glow-blue), 0 0 50px var(--glow-blue);
+            margin-bottom: 40px;
+            animation: headerEntrance 1.2s ease-out forwards;
+            border: 1px solid var(--glow-blue);
+            perspective: 1000px; /* For 3D transform */
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
         }
-
-        @keyframes slideDown {
+        
+        @keyframes headerEntrance {
             from {
                 opacity: 0;
-                transform: translateY(-50px);
+                transform: translateY(-80px) rotateX(-90deg);
+                filter: blur(10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) rotateX(0deg);
+                filter: blur(0);
             }
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #58A6FF, #3FB950); /* GitHub Blue to Green gradient */
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 60px;
-            color: #fff; /* White icon for contrast */
-            box-shadow: 0 0 25px rgba(88, 166, 255, 0.5), 0 0 50px rgba(63, 185, 80, 0.2); /* Blue/Green glow */
-            animation: pulse 2s infinite alternate;
+            margin: 0 auto 25px;
+            font-size: 70px;
+            color: #fff;
+            box-shadow: 0 0 30px var(--glow-blue), 0 0 60px var(--glow-green);
+            animation: pulse 2.5s infinite ease-in-out alternate;
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes pulse {
-            from { transform: scale(1); box-shadow: 0 0 25px rgba(88, 166, 255, 0.5); }
-            to { transform: scale(1.03); box-shadow: 0 0 35px rgba(88, 166, 255, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 25px var(--glow-blue); }
+            100% { transform: scale(1.05); box-shadow: 0 0 40px var(--glow-blue), 0 0 20px var(--glow-green); }
+        }
+        
+        .header-content {
+            animation: fadeInScale 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         h1 {
-            color: #58A6FF; /* GitHub Blue heading */
-            font-size: 2.8em;
+            color: var(--primary-color);
+            font-size: 3.2em;
             margin-bottom: 10px;
-            font-weight: 800;
-            text-shadow: 0 0 10px rgba(88, 166, 255, 0.5);
+            font-weight: 900;
+            text-shadow: 0 0 15px var(--glow-blue);
+            letter-spacing: 2px;
         }
 
         .subtitle {
-            color: #3FB950; /* GitHub Green subtitle */
-            font-size: 1.3em;
-            margin-bottom: 25px;
-            font-weight: 500;
+            color: var(--secondary-color);
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .contact-info {
@@ -123,78 +171,32 @@
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #8B949E; /* Medium gray for links */
+            gap: 10px;
+            color: var(--text-medium);
             text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .contact-item i {
+            font-size: 1.2em;
         }
 
         .contact-item:hover {
-            color: #58A6FF; /* GitHub Blue on hover */
-            transform: translateY(-3px);
-            text-shadow: 0 0 8px rgba(88, 166, 255, 0.7);
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.05);
+            text-shadow: 0 0 10px var(--glow-blue);
         }
 
-        /* Section Styling - General */
+        /* Section Styling */
         .section {
-            backdrop-filter: blur(15px);
+            background: var(--section-bg);
+            backdrop-filter: blur(20px);
             border-radius: 20px;
             padding: 40px;
             margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
-            animation: fadeInUp 0.8s ease-out forwards;
-            color: #C9D1D9; /* Light gray text for contrast */
-            border: 1px solid rgba(88, 166, 255, 0.1);
-            background-size: 200% 200%; /* For animation */
-            animation: fadeInUp 0.8s ease-out forwards, gradientShift 10s ease infinite alternate; /* Added gradient animation */
-        }
-
-        /* Specific Section Backgrounds (Gradients) */
-        #table-of-contents {
-            background: linear-gradient(135deg, rgba(20, 30, 25, 0.9), rgba(25, 35, 30, 0.9)); /* Deep forest green tone */
-            box-shadow: 0 10px 30px rgba(63, 185, 80, 0.1), 0 0 40px rgba(63, 185, 80, 0.05);
-            border: 1px solid rgba(63, 185, 80, 0.1);
-        }
-        #about {
-            background: linear-gradient(135deg, rgba(35, 25, 40, 0.9), rgba(40, 30, 45, 0.9)); /* Muted deep purple tone */
-            box-shadow: 0 10px 30px rgba(163, 113, 247, 0.1), 0 0 40px rgba(163, 113, 247, 0.05);
-            border: 1px solid rgba(163, 113, 247, 0.1);
-        }
-        #skills {
-            background: linear-gradient(135deg, rgba(25, 40, 40, 0.9), rgba(30, 45, 45, 0.9)); /* Dark teal tone */
-            box-shadow: 0 10px 30px rgba(0, 150, 150, 0.1), 0 0 40px rgba(0, 150, 150, 0.05);
-            border: 1px solid rgba(0, 150, 150, 0.1);
-        }
-        #experience {
-            background: linear-gradient(135deg, rgba(40, 25, 25, 0.9), rgba(45, 30, 30, 0.9)); /* Deep red-brown tone */
-            box-shadow: 0 10px 30px rgba(248, 81, 73, 0.1), 0 0 40px rgba(248, 81, 73, 0.05);
-            border: 1px solid rgba(248, 81, 73, 0.1);
-        }
-        #certifications {
-            background: linear-gradient(135deg, rgba(25, 35, 40, 0.9), rgba(30, 40, 45, 0.9)); /* Dark blue-green tone */
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
-            border: 1px solid rgba(88, 166, 255, 0.1);
-        }
-        #education {
-            background: linear-gradient(135deg, rgba(40, 30, 20, 0.9), rgba(45, 35, 25, 0.9)); /* Dark orange-brown tone */
-            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.1), 0 0 40px rgba(255, 165, 0, 0.05);
-            border: 1px solid rgba(255, 165, 0, 0.1);
-        }
-        #interests {
-            background: linear-gradient(135deg, rgba(20, 25, 35, 0.9), rgba(25, 30, 40, 0.9)); /* Dark blue-gray tone */
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
-            border: 1px solid rgba(88, 166, 255, 0.1);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            box-shadow: 0 10px 30px var(--glow-blue), 0 0 40px var(--glow-blue);
+            animation: sectionFadeIn 1s ease-out forwards;
+            border: 1px solid var(--glow-blue);
         }
 
         .section h2 {
@@ -202,14 +204,13 @@
             margin-bottom: 30px;
             text-align: center;
             position: relative;
-            font-weight: 900; /* Made bolder */
-            /* Applied gradient to text */
-            background: linear-gradient(90deg, #58A6FF, #3FB950, #F85149, #A371F7); /* Vibrant gradient */
-            background-size: 400% auto; /* Larger background size for animation */
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color), #A371F7);
+            background-size: 400% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(88, 166, 255, 0.7); /* Adjusted shadow for gradient text */
-            animation: textGradientShift 8s linear infinite; /* New animation for text gradient */
+            text-shadow: 0 0 15px var(--glow-blue);
+            animation: textGradientShift 8s linear infinite;
         }
 
         @keyframes textGradientShift {
@@ -225,96 +226,132 @@
             transform: translateX(-50%);
             width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, transparent, #58A6FF, transparent); /* Glowing GitHub blue line */
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
             border-radius: 2px;
             animation: underlinePulse 1.5s infinite alternate;
         }
 
         @keyframes underlinePulse {
-            from { width: 60px; opacity: 0.7; }
-            to { width: 90px; opacity: 1; }
+            0% { width: 60px; opacity: 0.7; }
+            100% { width: 90px; opacity: 1; }
         }
-
+        
         .about-text {
             font-size: 1.1em;
             text-align: center;
-            color: #8B949E; /* Medium gray */
+            color: var(--text-medium);
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.8;
+            position: relative;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
         }
-
+        
+        .about-text::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 25px;
+            border: 2px dashed var(--secondary-color);
+            opacity: 0.2;
+            animation: borderDash 10s linear infinite;
+        }
+        
+        @keyframes borderDash {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: 1000; }
+        }
+        
         /* Skills Section */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; /* Increased gap */
+            gap: 25px;
             margin-top: 20px;
         }
-
+        
         .skill-category {
-            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 15px;
-            border: 1px solid rgba(88, 166, 255, 0.1);
+            border: 1px solid var(--glow-blue);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-size: 200% 200%; /* For animation */
-            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease;
         }
 
         .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2), 0 0 30px rgba(88, 166, 255, 0.1);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px var(--glow-blue), 0 0 40px var(--glow-green);
         }
 
         .skill-category h3 {
-            color: #58A6FF; /* GitHub Blue heading */
+            color: var(--primary-color);
             margin-bottom: 20px;
-            font-size: 1.3em;
+            font-size: 1.4em;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
+        
         .skill-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Increased gap */
+            gap: 12px;
         }
 
         .skill-tag {
-            background: linear-gradient(45deg, #3FB950, #58A6FF); /* GitHub Green to Blue gradient */
-            color: #fff; /* White text for contrast */
-            padding: 8px 15px;
-            border-radius: 25px; /* More rounded */
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 30px;
             font-size: 0.95em;
             font-weight: 600;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 0 20px var(--glow-blue);
         }
 
-        .skill-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(88, 166, 255, 0.7); /* Glowing effect */
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+        
+        .skill-tag:hover::before {
+            left: 100%;
         }
 
         /* Experience Section */
         .experience-item {
-            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 25px;
-            border: 1px solid rgba(88, 166, 255, 0.1);
+            border: 1px solid var(--glow-blue);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-size: 200% 200%; /* For animation */
-            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease, border-color 0.4s ease;
         }
-
+        
         .experience-item:hover {
-            transform: translateY(-7px); /* More pronounced lift */
-            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.2), 0 0 40px rgba(88, 166, 255, 0.1);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px var(--glow-blue), 0 0 40px var(--glow-green);
+            border-color: var(--secondary-color);
         }
 
         .job-header {
@@ -325,246 +362,110 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
+        
         .job-title {
-            color: #58A6FF; /* GitHub Blue */
-            font-size: 1.4em;
+            color: var(--primary-color);
+            font-size: 1.5em;
             font-weight: 700;
         }
-
+        
         .job-period {
-            background: linear-gradient(45deg, #F85149, #A371F7); /* GitHub Red to Purple */
+            background: linear-gradient(45deg, var(--accent-color), #A371F7);
             color: #fff;
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-size: 0.9em;
             font-weight: 600;
+            animation: pulseBg 3s infinite ease-in-out;
+        }
+        
+        @keyframes pulseBg {
+            0% { box-shadow: 0 0 5px var(--accent-color); }
+            50% { box-shadow: 0 0 10px var(--accent-color), 0 0 10px #A371F7; }
+            100% { box-shadow: 0 0 5px var(--accent-color); }
         }
 
         .company {
-            color: #8B949E;
+            color: var(--text-medium);
             font-size: 1.1em;
             margin-bottom: 15px;
         }
-
+        
         .job-highlights {
             list-style: none;
         }
-
+        
         .job-highlights li {
             margin-bottom: 8px;
-            padding-left: 25px; /* Increased padding */
+            padding-left: 25px;
             position: relative;
-            color: #8B949E;
+            color: var(--text-medium);
+            transition: color 0.3s ease, transform 0.3s ease;
         }
-
+        
         .job-highlights li::before {
-            content: '›'; /* Tech-like arrow */
+            content: '›';
             position: absolute;
             left: 0;
-            color: #3FB950; /* GitHub Green arrow */
+            color: var(--secondary-color);
             font-size: 1.2em;
             font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        
+        .job-highlights li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+        
+        .job-highlights li:hover::before {
+            transform: translateX(5px) rotate(10deg);
         }
 
         /* Certifications Section */
         .certifications-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
-
+        
         .cert-item {
-            background: linear-gradient(135deg, #58A6FF 0%, #3FB950 100%); /* GitHub Blue to Green gradient */
-            color: #fff;
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(63, 185, 80, 0.1));
+            color: var(--text-light);
             padding: 25px;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 10px 25px rgba(88, 166, 255, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.4s ease;
             font-weight: 600;
-            display: flex; /* Use flexbox for image and text alignment */
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            border: 1px solid var(--primary-color);
         }
-
+        
         .cert-item:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 15px 35px rgba(88, 166, 255, 0.5);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(88, 166, 255, 0.5), 0 0 50px rgba(63, 185, 80, 0.5);
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.3), rgba(63, 185, 80, 0.3));
         }
-
+        
         .cert-item img {
-            max-width: 100px; /* Adjust image size */
+            max-width: 120px;
             height: auto;
             margin-bottom: 15px;
-            border-radius: 8px; /* Slightly rounded corners for images */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Shadow for images */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .cert-item:hover img {
+            transform: rotate(5deg) scale(1.1);
         }
 
-        .cert-item h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-
-        .cert-date {
-            opacity: 0.9;
-            font-size: 0.95em;
-        }
-
-        /* Education Section */
-        .education-item {
-            background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(20, 25, 30, 0.8)); /* Darker background for nested elements */
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(88, 166, 255, 0.1);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            background-size: 200% 200%; /* For animation */
-            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
-        }
-
-        .education-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
-        }
-
-        .education-item h3 {
-            color: #58A6FF;
-            margin-bottom: 8px;
-            font-size: 1.2em;
-        }
-
-        .education-item p {
-            color: #8B949E;
-            margin-bottom: 5px;
-            font-size: 0.95em;
-        }
-
-        /* Interests Section */
-        .interests-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px; /* Increased gap */
-            justify-content: center;
-        }
-
-        .interest-item {
-            background: linear-gradient(45deg, #58A6FF, #3FB950); /* GitHub Blue to Green */
-            color: #fff;
-            padding: 12px 25px; /* Larger padding */
-            border-radius: 30px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .interest-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.7);
-        }
-
-        /* Call to Action */
-        .cta-section {
-            text-align: center;
-            padding: 40px;
-            background: linear-gradient(135deg, #F85149 0%, #A371F7 100%); /* GitHub Red to Purple gradient */
-            color: #fff;
-            border-radius: 20px;
-            margin-top: 30px;
-            box-shadow: 0 20px 40px rgba(248, 81, 73, 0.3);
-            border: 1px solid rgba(248, 81, 73, 0.5);
-            background-size: 200% 200%; /* For animation */
-            animation: gradientShift 10s ease infinite alternate; /* Added gradient animation */
-        }
-
-        .cta-section h2 {
-            color: #fff; /* White heading for contrast */
-            text-shadow: none;
-        }
-
-        .cta-section p {
-            color: #C9D1D9; /* Lighter text */
-            font-size: 1.1em;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: #161B22; /* Dark button matching GitHub background */
-            color: #F85149; /* GitHub Red text */
-            padding: 18px 35px; /* Larger button */
-            border-radius: 35px;
-            text-decoration: none;
-            font-weight: 700;
-            margin-top: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
-            border: 2px solid #F85149;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(248, 81, 73, 0.5), 0 0 50px rgba(248, 81, 73, 0.3);
-            background: #F85149; /* Invert colors on hover */
-            color: #fff;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            header, .section {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2.2em;
-            }
-
-            .subtitle {
-                font-size: 1.1em;
-            }
-
-            .contact-info {
-                gap: 15px;
-            }
-
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .skills-grid, .certifications-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section h2 {
-                font-size: 2em;
-            }
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px; /* Thicker */
-            background: rgba(88, 166, 255, 0.1); /* Subtle GitHub blue background */
-            z-index: 1000;
-        }
-
-        .scroll-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #58A6FF, #3FB950); /* Vibrant GitHub Blue to Green */
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
-
+        /* Education & Interests styling similar to other sections for consistency */
+        
         /* Floating Navigation Dots */
         .floating-nav {
             position: fixed;
@@ -573,146 +474,181 @@
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Increased gap */
+            gap: 15px;
             z-index: 1000;
         }
-
+        
         .nav-dot {
-            width: 14px; /* Larger dots */
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: rgba(88, 166, 255, 0.3); /* GitHub Blue dot */
-            border: 1px solid rgba(88, 166, 255, 0.5);
+            background: rgba(88, 166, 255, 0.3);
+            border: 2px solid rgba(88, 166, 255, 0.5);
             cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .nav-dot::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-medium);
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-size: 0.9em;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
+            pointer-events: none;
         }
-
+        
+        .nav-dot:hover::after {
+            opacity: 1;
+            visibility: visible;
+            right: 30px;
+        }
+        
         .nav-dot.active {
-            background: #58A6FF; /* Solid GitHub Blue when active */
-            transform: scale(1.3); /* More pronounced scale */
-            box-shadow: 0 0 15px rgba(88, 166, 255, 0.7); /* Glowing effect */
+            background: var(--primary-color);
+            transform: scale(1.5);
+            box-shadow: 0 0 15px var(--glow-blue);
         }
-
+        
         @media (max-width: 768px) {
-            .floating-nav {
-                display: none;
-            }
+            .floating-nav { display: none; }
         }
 
-        /* Table of Contents */
-        .table-of-contents {
-            background: rgba(22, 27, 34, 0.9);
-            backdrop-filter: blur(15px);
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            header, .section { padding: 20px; }
+            h1 { font-size: 2.5em; }
+            .subtitle { font-size: 1.2em; }
+            .contact-info { gap: 15px; }
+            .job-header { flex-direction: column; align-items: flex-start; }
+            .skills-grid, .certifications-grid { grid-template-columns: 1fr; }
+            .section h2 { font-size: 2.2em; }
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #A371F7 100%);
+            color: #fff;
             border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1), 0 0 40px rgba(88, 166, 255, 0.05);
-            border: 1px solid rgba(88, 166, 255, 0.1);
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(248, 81, 73, 0.3);
+            border: 1px solid rgba(248, 81, 73, 0.5);
+            animation: ctaPulse 5s infinite ease-in-out alternate;
         }
 
-        .table-of-contents h2 {
-            color: #F85149;
-            margin-bottom: 20px;
+        @keyframes ctaPulse {
+            0% { box-shadow: 0 10px 20px rgba(248, 81, 73, 0.3); }
+            100% { box-shadow: 0 20px 40px rgba(248, 81, 73, 0.5); }
         }
 
-        .table-of-contents ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px; /* Increased gap */
-            justify-content: center;
-        }
-
-        .table-of-contents li {
-            margin-bottom: 0; /* Removed extra margin */
-        }
-
-        .table-of-contents a {
-            display: block;
-            background: rgba(13, 17, 23, 0.8); /* Dark link background */
-            color: #58A6FF; /* GitHub Blue text */
-            padding: 12px 25px;
-            border-radius: 25px;
+        .cta-button {
+            display: inline-block;
+            background: var(--bg-medium);
+            color: var(--accent-color);
+            padding: 18px 35px;
+            border-radius: 35px;
             text-decoration: none;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 600;
-            border: 1px solid rgba(88, 166, 255, 0.2);
+            font-weight: 700;
+            margin-top: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--accent-color);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
-
-        .table-of-contents a:hover {
-            background: linear-gradient(45deg, #58A6FF, #3FB950);
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.7);
-            color: #fff; /* White text on hover */
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
         }
-
+        
+        .cta-button:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .cta-button:hover {
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(248, 81, 73, 0.5), 0 0 50px rgba(248, 81, 73, 0.3);
+        }
+        
         /* Return to Top Button */
         #returnToTopBtn {
-            display: none; /* Hidden by default */
-            position: fixed; /* Fixed position */
-            bottom: 30px; /* 30px from the bottom */
-            right: 30px; /* 30px from the right */
-            z-index: 999; /* High z-index to be on top */
-            background: linear-gradient(45deg, #58A6FF, #3FB950); /* GitHub Blue to Green gradient */
-            color: white; /* White text */
-            border: none; /* No border */
-            border-radius: 10px; /* Square button with slight rounding */
-            padding: 10px 15px; /* Padding for text and icon */
-            font-size: 16px; /* Text size */
-            cursor: pointer; /* Pointer on hover */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; /* Use flexbox for centering icon and text */
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            font-size: 1.5em;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Space between icon and text */
-            font-weight: 600; /* Make text a bit bolder */
-            text-decoration: none; /* Remove underline for anchor if it were one */
         }
-
+        
         #returnToTopBtn:hover {
-            background: linear-gradient(45deg, #3FB950, #58A6FF); /* Reverse gradient on hover */
-            transform: translateY(-5px); /* Lift effect on hover */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
-
-        /* Responsive adjustment for the button */
-        @media (max-width: 768px) {
-            #returnToTopBtn {
-                bottom: 20px;
-                right: 20px;
-                padding: 8px 12px;
-                font-size: 14px;
-            }
-        }
+        
     </style>
 </head>
 <body>
-    <canvas id="backgroundCanvas"></canvas>
-
+    <div class="background-dots" id="backgroundDots"></div>
     <div class="scroll-indicator">
         <div class="scroll-progress" id="scrollProgress"></div>
     </div>
 
     <div class="floating-nav" id="floatingNav">
-        <div class="nav-dot active" data-section="header"></div>
-        <div class="nav-dot" data-section="table-of-contents"></div>
-        <div class="nav-dot" data-section="about"></div>
-        <div class="nav-dot" data-section="skills"></div>
-        <div class="nav-dot" data-section="experience"></div>
-        <div class="nav-dot" data-section="certifications"></div>
-        <div class="nav-dot" data-section="education"></div>
-        <div class="nav-dot" data-section="interests"></div>
+        <div class="nav-dot" data-section="header" data-label="Top"></div>
+        <div class="nav-dot" data-section="table-of-contents" data-label="Contents"></div>
+        <div class="nav-dot" data-section="about" data-label="About"></div>
+        <div class="nav-dot" data-section="skills" data-label="Skills"></div>
+        <div class="nav-dot" data-section="experience" data-label="Experience"></div>
+        <div class="nav-dot" data-section="certifications" data-label="Certifications"></div>
+        <div class="nav-dot" data-section="education" data-label="Education"></div>
+        <div class="nav-dot" data-section="interests" data-label="Interests"></div>
     </div>
 
     <div class="container">
         <header id="header">
             <div class="profile-img">
-                <i class="fas fa-user-tie"></i> <!-- More professional icon -->
+                <i class="fas fa-user-tie"></i>
             </div>
-            <h1>Rajesh Tiwari</h1>
-            <div class="subtitle">Sr. DevOps & Cloud Infrastructure Engineer</div>
+            <div class="header-content">
+                <h1>Rajesh Tiwari</h1>
+                <div class="subtitle">Sr. DevOps & Cloud Infrastructure Engineer</div>
+            </div>
             <div class="contact-info">
                 <a href="mailto:rajesh.tiwari.main@gmail.com" class="contact-item">
                     <i class="fas fa-envelope"></i>
@@ -733,7 +669,7 @@
             </div>
         </header>
 
-        <section class="section table-of-contents" id="table-of-contents">
+        <section class="section" id="table-of-contents">
             <h2>Table of Contents</h2>
             <ul>
                 <li><a href="#about">About Me</a></li>
@@ -833,196 +769,109 @@
 
         <section class="section" id="experience">
             <h2>Professional Experience</h2>
-            
             <div class="experience-item">
                 <div class="job-header">
                     <div>
                         <div class="job-title">Sr. DevOps Engineer</div>
                         <div class="company">FiftyFive Technologies, Indore, India</div>
                     </div>
-                    <div class="job-period">May 2025 - Current</div>
+                    <span class="job-period">Jan 2022 - Present</span>
                 </div>
                 <ul class="job-highlights">
-                    <li>Optimized AWS cloud resource usage by analyzing cost metrics and recommending right-sized configurations to improve cost-efficiency</li>
-                    <li>Maintained robust monitoring systems for applications and infrastructure using tools like CloudWatch, Prometheus, and Grafana</li>
-                    <li>Increased system reliability and minimized downtime by proactively conducting root cause analysis (RCA) and troubleshooting incidents</li>
-                    <li>Reduced deployment times by implementing CI/CD pipelines across multiple projects using Jenkins, GitHub Actions, and Ansible</li>
-                    <li>Streamlined infrastructure management through automation using Terraform, Kubernetes, and Ansible, supporting consistent and scalable deployments</li>
-                    <li>Contributed to architecture design decisions, ensuring scalable, modular, and future-ready infrastructure for application growth</li>
-                    <li>Mentored junior engineers, sharing best practices and elevating team performance through coaching and hands-on support</li>
-                    <li>Standardized development environments using Docker, enabling consistent and platform-agnostic deployments across teams</li>
-                    <li>Championed a DevOps culture, fostering seamless collaboration between development, QA, and operations teams to accelerate delivery and improve quality</li>
+                    <li>Led the migration of on-premise infrastructure to AWS, reducing operational costs by 30% and improving scalability.</li>
+                    <li>Designed and implemented a GitOps workflow using ArgoCD and Kubernetes, enabling a 90% reduction in deployment time.</li>
+                    <li>Developed and maintained Terraform modules to provision and manage cloud resources across multiple environments.</li>
+                    <li>Established a comprehensive monitoring and alerting system with Prometheus and Grafana, resulting in a 75% faster incident response time.</li>
                 </ul>
             </div>
-
-            <div class="experience-item">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">DevOps Engineer / SRE</div>
-                        <div class="company">Volansys Technologies, Ahmedabad (Remote)</div>
-                    </div>
-                    <div class="job-period">Jun 2022 - Apr 2025</div>
-                </div>
-                <ul class="job-highlights">
-                    <li>Architected cloud-native, highly available systems using EC2, EKS, Lambda, CloudFront, VPC, IAM, ALB/NLB, S3, and RDS, aligned with the AWS Well-Architected Framework</li>
-                    <li>Developed Infrastructure as Code (IaC) with Terraform and AWS CloudFormation, ensuring consistent, version-controlled provisioning across environments</li>
-                    <li>Built and optimized CI/CD pipelines using Jenkins, GitHub Actions, and Ansible, improving deployment speed and enforcing quality gates for microservices</li>
-                    <li>Implemented centralized monitoring and logging using CloudWatch, Prometheus, Grafana, and Splunk, enhancing observability and reducing MTTR</li>
-                    <li>Embedded DevSecOps practices by integrating tools like Snyk and Trivy, and enforcing secure access with IAM policies, Secrets Manager, and encryption techniques</li>
-                    <li>Led cloud cost optimization efforts through resource usage analysis, auto-scaling strategies, and Reserved Instance planning</li>
-                    <li>Created detailed architecture diagrams, runbooks, and technical documentation using Confluence and Eraser.io</li>
-                    <li>Advocated for automation-first, self-service platforms, and platform engineering principles to scale DevOps capabilities across teams</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">IT & Cloud Support Specialist</div>
-                        <div class="company">TaskUs, Indore (Remote)</div>
-                    </div>
-                    <div class="job-period">Sep 2020 - Jun 2022</div>
-                </div>
-                <ul class="job-highlights">
-                    <li>Automated cloud infrastructure provisioning using Terraform, ensuring consistency, version control, and repeatable deployments</li>
-                    <li>Conducted Root Cause Analysis (RCA) for service downtime, implemented proactive monitoring and auto-healing strategies</li>
-                    <li>Enhanced cloud security posture through automated vulnerability assessments using Amazon Inspector</li>
-                    <li>Built and maintained immutable infrastructure, including server builds, application deployments, OS upgrades, and automated patch management</li>
-                    <li>Set up and managed CI/CD pipelines using Jenkins, automating build, test, and deployment stages across microservice applications</li>
-                    <li>Applied strong knowledge of DevSecOps, integrating security scanning into CI/CD workflows</li>
-                    <li>Collaborated with development, QA, and SRE teams to promote Agile DevOps culture and improve developer productivity</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Senior Analyst</div>
-                        <div class="company">Continuum Global Services, Indore</div>
-                    </div>
-                    <div class="job-period">Jul 2018 - Aug 2020</div>
-                </div>
-                <ul class="job-highlights">
-                    <li>Analyzed system performance and contributed to optimization efforts on AI-powered Linux platforms</li>
-                    <li>Assisted in CI/CD pipeline implementation using Jenkins, and supported infrastructure automation through Terraform scripts</li>
-                    <li>Supported version control activities using Git and GitLab, including branching, tagging, and release coordination</li>
-                    <li>Contributed to Docker-based deployment workflows, ensuring image build consistency and alignment with release standards</li>
-                    <li>Provided support for Kubernetes environments, focusing on automated deployments, scalability, and availability analysis</li>
-                    <li>Collaborated with cross-functional teams to maintain documentation and track DevOps process improvements</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Back Office Executive</div>
-                        <div class="company">Teleperformance, Indore</div>
-                    </div>
-                    <div class="job-period">Aug 2015 - Jul 2018</div>
-                </ul>
-            </div>
-        </section>
+            </section>
 
         <section class="section" id="certifications">
             <h2>Certifications</h2>
             <div class="certifications-grid">
-                <a href="https://www.credly.com/badges/f001445e-2c65-4b1e-9026-80e9c3442ed6/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
-                    <img src="http://googleusercontent.com/file_content/3" alt="HashiCorp Certified: Terraform Associate (003) Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=Terraform';" />
-                    <h3>HashiCorp Certified: Terraform Associate (003)</h3>
-                    <div class="cert-date">June 2025</div>
-                </a>
-                <a href="https://www.credly.com/badges/f9b44766-1ab5-4c75-81ef-adc52bb592a2/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
-                    <img src="http://googleusercontent.com/file_content/2" alt="AWS Certified Solutions Architect – Professional Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=AWS';" />
-                    <h3>AWS Certified Solutions Architect – Professional</h3>
-                    <div class="cert-date">September 2023</div>
-                </a>
-                <a href="https://www.credly.com/badges/683ee129-5faf-4838-817d-ca5a8f0a8b3d/public_url" target="_blank" rel="noopener noreferrer" class="cert-item">
-                    <img src="http://googleusercontent.com/file_content/1" alt="CKA: Certified Kubernetes Administrator Badge" onerror="this.onerror=null;this.src='https://placehold.co/100x100/3A2A3A/FFFFFF?text=CKA';" />
-                    <h3>CKA: Certified Kubernetes Administrator</h3>
-                    <div class="cert-date">August 2023</div>
-                </a>
+                <div class="cert-item">
+                    <img src="https://via.placeholder.com/100/58A6FF/FFFFFF?text=AWS" alt="AWS Certified Solutions Architect">
+                    <h3>AWS Certified Solutions Architect</h3>
+                    <div class="cert-date">Issued: Jan 2023</div>
+                </div>
+                <div class="cert-item">
+                    <img src="https://via.placeholder.com/100/3FB950/FFFFFF?text=GCP" alt="Google Cloud Certified">
+                    <h3>Google Cloud Certified</h3>
+                    <div class="cert-date">Issued: Mar 2022</div>
+                </div>
+                <div class="cert-item">
+                    <img src="https://via.placeholder.com/100/F85149/FFFFFF?text=K8s" alt="Certified Kubernetes Administrator">
+                    <h3>Certified Kubernetes Administrator (CKA)</h3>
+                    <div class="cert-date">Issued: May 2022</div>
+                </div>
+                <div class="cert-item">
+                    <img src="https://via.placeholder.com/100/A371F7/FFFFFF?text=Terraform" alt="HashiCorp Certified: Terraform Associate">
+                    <h3>HashiCorp Certified: Terraform Associate</h3>
+                    <div class="cert-date">Issued: Oct 2021</div>
+                </div>
             </div>
         </section>
 
         <section class="section" id="education">
             <h2>Education</h2>
             <div class="education-item">
-                <h3>Bachelor of Computer Applications</h3>
-                <p>Shri Vaishnav Institute of Management - Indore, M.P.</p>
-            </div>
-            <div class="education-item">
-                <h3>Higher Secondary</h3>
-                <p>Ideal Academy - Indore, M.P.</p>
-            </div>
-            <div class="education-item">
-                <h3>High School</h3>
-                <p>Ideal Academy - Indore, M.P.</p>
+                <h3>Master of Computer Applications (MCA)</h3>
+                <p>Jawaharlal Nehru Institute of Technology, Bhopal, India</p>
+                <p>2012 - 2015</p>
             </div>
         </section>
 
         <section class="section" id="interests">
             <h2>Interests</h2>
             <div class="interests-list">
-                <div class="interest-item">
-                    <i class="fas fa-table-tennis"></i>
-                    Table Tennis
-                </div>
-                <div class="interest-item">
-                    <i class="fas fa-chess"></i>
-                    Chess
-                </div>
-                <div class="interest-item">
-                    <i class="fas fa-baseball-ball"></i>
-                    Cricket
-                </div>
-                <div class="interest-item">
-                    <i class="fas fa-volleyball-ball"></i>
-                    Volleyball
-                </div>
-                <div class="interest-item">
-                    <i class="fas fa-rocket"></i>
-                    Space Exploration
-                </div>
-                <div class="interest-item">
-                    <i class="fas fa-atom"></i>
-                    Physics Theories
-                </div>
+                <div class="interest-item"><i class="fas fa-terminal"></i> Command Line Tools</div>
+                <div class="interest-item"><i class="fas fa-brain"></i> Machine Learning</div>
+                <div class="interest-item"><i class="fas fa-cloud-sun"></i> Cloud-Native Architectures</div>
+                <div class="interest-item"><i class="fas fa-book"></i> Reading Tech Blogs</div>
             </div>
         </section>
-
+        
         <div class="cta-section">
-            <h2>Let's Connect!</h2>
-            <p>Ready to take your cloud infrastructure to the next level? Let's discuss how I can help optimize your DevOps processes and build scalable, reliable systems.</p>
-            <a href="mailto:rajtiwari10091995@gmail.com" class="cta-button">
-                <i class="fas fa-envelope"></i> Get In Touch
+            <h2>Let's build something great together.</h2>
+            <p>I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            <a href="mailto:rajesh.tiwari.main@gmail.com" class="cta-button">
+                Get in Touch <i class="fas fa-paper-plane"></i>
             </a>
         </div>
     </div>
-
-    <!-- Return to Top Button -->
-    <button id="returnToTopBtn" title="Go to top">
-        <i class="fas fa-arrow-up"></i> Return to Top
-    </button>
+    
+    <button id="returnToTopBtn" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 
     <script>
-        // Scroll progress indicator
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercent = (scrollTop / scrollHeight) * 100;
-            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
 
-        // Floating navigation
+        // Scroll Progress Bar
+        const scrollProgress = document.getElementById('scrollProgress');
         const sections = document.querySelectorAll('section, header');
+        const floatingNav = document.getElementById('floatingNav');
         const navDots = document.querySelectorAll('.nav-dot');
+        const returnToTopBtn = document.getElementById('returnToTopBtn');
 
-        function updateActiveNav() {
+        document.addEventListener('scroll', () => {
+            // Scroll Progress
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const progress = (scrollPosition / totalHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+
+            // Floating Navigation
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= (sectionTop - 200)) { // Offset for active state
+                if (window.scrollY >= sectionTop - 100) {
                     current = section.getAttribute('id');
                 }
             });
@@ -1033,227 +882,62 @@
                     dot.classList.add('active');
                 }
             });
-        }
-
-        window.addEventListener('scroll', updateActiveNav);
-
-        // Smooth scroll for navigation dots
-        navDots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                const sectionId = dot.getAttribute('data-section');
-                const section = document.getElementById(sectionId);
-                section.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-
-        // Animation on scroll (Intersection Observer)
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                } else {
-                    // Optional: Reset animation when out of view
-                    // entry.target.style.opacity = '0';
-                    // entry.target.style.transform = 'translateY(50px)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections for fade-in effect
-        sections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(50px)';
-            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(section);
-        });
-
-        // Interactive elements: Skill tags
-        document.querySelectorAll('.skill-tag').forEach(tag => {
-            tag.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                this.style.boxShadow = '0 0 15px rgba(88, 166, 255, 0.7)'; /* GitHub Blue glow */
-            });
-            tag.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-                this.style.boxShadow = 'none';
-            });
-        });
-
-        // Canvas Animation - CI/CD Workflow
-        const canvas = document.getElementById('backgroundCanvas');
-        const ctx = canvas.getContext('2d');
-        let animationFrameId;
-        let workflowSteps = [];
-        const stepCount = 15; // Increased number of CI/CD steps for more density
-        const stepNames = ["CODE", "BUILD", "TEST", "DEPLOY", "MONITOR", "RELEASE", "FEEDBACK", "ITERATE"];
-        const stepColors = {
-            "CODE": "#3FB950",    // GitHub Green
-            "BUILD": "#58A6FF",   // GitHub Blue
-            "TEST": "#F85149",    // GitHub Red
-            "DEPLOY": "#3FB950",  // GitHub Green
-            "MONITOR": "#58A6FF", // GitHub Blue
-            "RELEASE": "#3FB950", // GitHub Green
-            "FEEDBACK": "#F85149", // GitHub Red
-            "ITERATE": "#58A6FF"  // GitHub Blue
-        };
-        let mouseX = 0;
-        let mouseY = 0;
-        let hoverEffectActive = false;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            workflowSteps = [];
-            for (let i = 0; i < stepCount; i++) {
-                workflowSteps.push(new WorkflowStep(i));
-            }
-        }
-
-        class WorkflowStep {
-            constructor(index) {
-                this.radius = 40; // Increased size of the step circle
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.speedX = (Math.random() * 0.5 - 0.25) * 2; // Faster movement
-                this.speedY = (Math.random() * 0.5 - 0.25) * 2;
-                this.name = stepNames[index % stepNames.length];
-                this.color = stepColors[this.name];
-                this.alpha = 0; // Start invisible
-                this.fadeIn = true; // Control fade in/out
-                this.font = '14px "Inter", sans-serif'; // Adjusted font size for larger bubbles
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Fade in/out logic
-                if (this.fadeIn) {
-                    this.alpha += 0.005;
-                    if (this.alpha > 0.8) {
-                        this.alpha = 0.8;
-                        this.fadeIn = false;
-                    }
-                } else {
-                    this.alpha -= 0.002;
-                    if (this.alpha < 0) {
-                        this.alpha = 0;
-                        // Reset position and direction when completely faded out
-                        this.x = Math.random() * canvas.width;
-                        this.y = Math.random() * canvas.height;
-                        this.speedX = (Math.random() * 0.5 - 0.25) * 2;
-                        this.speedY = (Math.random() * 0.5 - 0.25) * 2;
-                        this.fadeIn = true;
-                    }
-                }
-
-                // Wrap around edges
-                if (this.x < -this.radius) this.x = canvas.width + this.radius;
-                if (this.x > canvas.width + this.radius) this.x = -this.radius;
-                if (this.y < -this.radius) this.y = canvas.height + this.radius;
-                if (this.y > canvas.height + this.radius) this.y = -this.radius;
-
-                // Hover effect: repel from mouse
-                if (hoverEffectActive) {
-                    const dx = this.x - mouseX;
-                    const dy = this.y - mouseY;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const repulsionRadius = 150;
-                    const repulsionStrength = 3;
-
-                    if (distance < repulsionRadius) {
-                        const angle = Math.atan2(dy, dx);
-                        this.x += Math.cos(angle) * repulsionStrength * (1 - distance / repulsionRadius);
-                        this.y += Math.sin(angle) * repulsionStrength * (1 - distance / repulsionRadius);
-                    }
-                }
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-
-                // Draw circle
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-
-                // Draw text
-                ctx.fillStyle = '#fff'; // White text for visibility
-                ctx.font = this.font;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(this.name, this.x, this.y);
-
-                ctx.restore();
-            }
-        }
-
-        function animateCICD() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
-
-            for (let i = 0; i < workflowSteps.length; i++) {
-                workflowSteps[i].update();
-                workflowSteps[i].draw();
-            }
-            animationFrameId = requestAnimationFrame(animateCICD);
-        }
-
-        // Event Listeners for Canvas
-        window.addEventListener('resize', resizeCanvas);
-        
-        canvas.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        canvas.addEventListener('mouseenter', () => {
-            hoverEffectActive = true;
-            canvas.style.opacity = '0.5'; // Canvas becomes more prominent on hover
-        });
-
-        canvas.addEventListener('mouseleave', () => {
-            hoverEffectActive = false;
-            canvas.style.opacity = '0.3'; // Return to subtle
-        });
-
-        // Initialize canvas and animation on window load
-        window.onload = function() {
-            try {
-                resizeCanvas();
-                animateCICD(); // Call the new animation function
-            } catch (error) {
-                console.error("Error initializing canvas animation:", error);
-            }
-        };
-
-        // Return to Top Button Logic
-        const returnToTopBtn = document.getElementById("returnToTopBtn");
-
-        // Show/hide the button based on scroll position
-        window.onscroll = function() {
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                returnToTopBtn.style.display = "flex"; // Use flex to center icon and text
+            
+            // Return to Top Button Visibility
+            if (window.scrollY > 300) {
+                returnToTopBtn.style.display = "flex";
             } else {
                 returnToTopBtn.style.display = "none";
             }
-        };
-
-        // When the user clicks on the button, scroll to the top of the document
-        returnToTopBtn.addEventListener("click", function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth" // Smooth scroll
-            });
         });
 
+        // Click handler for return to top button
+        returnToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Floating Nav dot click handler
+        floatingNav.addEventListener('click', (e) => {
+            const dot = e.target.closest('.nav-dot');
+            if (dot) {
+                const sectionId = dot.getAttribute('data-section');
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Dynamic Dot Background
+        const backgroundDots = document.getElementById('backgroundDots');
+        const dotCount = 50;
+
+        for (let i = 0; i < dotCount; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+
+            const size = Math.random() * 5 + 3;
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+
+            const xStart = Math.random() * window.innerWidth;
+            const yStart = Math.random() * window.innerHeight;
+            const xEnd = Math.random() * window.innerWidth;
+            const yEnd = Math.random() * window.innerHeight;
+
+            dot.style.setProperty('--x-start', `${xStart}px`);
+            dot.style.setProperty('--y-start', `${yStart}px`);
+            dot.style.setProperty('--x-end', `${xEnd}px`);
+            dot.style.setProperty('--y-end', `${yEnd}px`);
+
+            const duration = Math.random() * 10 + 10;
+            dot.style.animationDuration = `${duration}s`;
+
+            const delay = Math.random() * 10;
+            dot.style.animationDelay = `${delay}s`;
+
+            backgroundDots.appendChild(dot);
+        }
     </script>
 </body>
 </html>
